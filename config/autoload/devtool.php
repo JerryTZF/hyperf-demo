@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 return [
     'generator' => [
-        'amqp' => [
+        'amqp'       => [
             'consumer' => [
                 'namespace' => 'App\\Amqp\\Consumer',
             ],
@@ -19,25 +19,25 @@ return [
                 'namespace' => 'App\\Amqp\\Producer',
             ],
         ],
-        'aspect' => [
+        'aspect'     => [
             'namespace' => 'App\\Aspect',
         ],
-        'command' => [
+        'command'    => [
             'namespace' => 'App\\Command',
         ],
         'controller' => [
             'namespace' => 'App\\Controller',
         ],
-        'job' => [
+        'job'        => [
             'namespace' => 'App\\Job',
         ],
-        'listener' => [
+        'listener'   => [
             'namespace' => 'App\\Listener',
         ],
         'middleware' => [
             'namespace' => 'App\\Middleware',
         ],
-        'Process' => [
+        'Process'    => [
             'namespace' => 'App\\Processes',
         ],
     ],

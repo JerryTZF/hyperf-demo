@@ -16,6 +16,8 @@
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",
         "hyperf/config": "~2.2.0",
+        "hyperf/constants": "^2.2",
+        "hyperf/database": "~2.2.0",
         "hyperf/db-connection": "~2.2.0",
         "hyperf/framework": "~2.2.0",
         "hyperf/guzzle": "~2.2.0",
@@ -23,8 +25,9 @@
         "hyperf/logger": "~2.2.0",
         "hyperf/memory": "~2.2.0",
         "hyperf/process": "~2.2.0",
-        "hyperf/database": "~2.2.0",
-        "hyperf/redis": "~2.2.0"
+        "hyperf/rate-limit": "^2.2.0",
+        "hyperf/redis": "~2.2.0",
+        "hyperf/validation": "^2.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
