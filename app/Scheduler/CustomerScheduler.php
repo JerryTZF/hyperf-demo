@@ -36,6 +36,6 @@ class CustomerScheduler
 
     public function isEnable(): bool
     {
-        return env('APP_ENV') === 'dev';
+        return env('APP_ENV') === 'pro';
     }
 }

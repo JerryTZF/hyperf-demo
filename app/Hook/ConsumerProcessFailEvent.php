@@ -15,6 +15,7 @@ namespace App\Hook;
 
 use Throwable;
 
+// 自定义进程退出事件
 class ConsumerProcessFailEvent
 {
     public Throwable $throwable;

@@ -15,12 +15,13 @@ namespace App\Process;
 
 use App\Exception\ProcessException;
 use App\Hook\ConsumerProcessFailEvent;
-use App\Lib\_Log\Log;
+use App\Job\ConsumerJob;
+use App\Job\ErrorDemoJob;
+use App\Lib\_RedisQueue\DriverFactory;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Process\AbstractProcess;
 use Hyperf\Process\Annotation\Process;
 use Hyperf\Process\ProcessManager;
-use Hyperf\Utils\ApplicationContext;
 use Hyperf\Utils\Coroutine;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
@@ -42,14 +43,22 @@ class ConsumerProcess extends AbstractProcess
             while (ProcessManager::isRunning()) {
                 $index += 1;
                 Coroutine::sleep(1);
-                if ($index > 10) {
+                if ($index > 300000) {
                     throw new ProcessException(500, '自定义进程异常抛出测试');
+                }
+                if ($index === 1) {
+                    for ($i = 2; $i--;) {
+                        // 向异步队列中投递消息
+                        $driver = DriverFactory::getDriverInstance('redis-queue');
+                        $driver->push(new ConsumerJob((string)$i, [$i]));
+                    }
                 }
             }
         } catch (ProcessException $e) {
             $this->dispatcher->dispatch(new ConsumerProcessFailEvent($e, 'ConsumerProcess'));
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
         }
-
     }
 
     public function isEnable($server): bool
