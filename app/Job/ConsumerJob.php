@@ -27,7 +27,11 @@ class ConsumerJob extends AbstractJob
     public function handle()
     {
         // 模拟任务耗时3秒
-        Coroutine::sleep(3);
-        Log::stdout()->info("任务ID:{$this->uniqueId}");
+        Coroutine::sleep(1);
+        Log::stdout()->info("任务ID:{$this->uniqueId}--开始");
+        Coroutine::sleep(1);
+        Log::stdout()->info("任务ID:{$this->uniqueId}--进行中");
+        Coroutine::sleep(1);
+        Log::stdout()->info("任务ID:{$this->uniqueId}--结束");
     }
 }
