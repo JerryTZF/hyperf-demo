@@ -11,9 +11,10 @@ return [
         ],
         // 队列前缀
         'channel'        => 'queue',
-        // pop 消息的超时时间
+        // pop 消息的超时时间(详见：brPop)
         'timeout'        => 2,
         // 消息重试间隔(秒)
+        // [注意]: 真正的重试时间为: retry_seconds + timeout = 7；实验所得
         'retry_seconds'  => 5,
         // 消费消息超时时间
         'handle_timeout' => 10,
@@ -21,7 +22,7 @@ return [
         'processes'      => 1,
         // 并行消费消息数目
         'concurrent'     => [
-            'limit' => 10,
+            'limit' => 20,
         ],
     ],
 ];

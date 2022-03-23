@@ -21,6 +21,7 @@ use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 
 #[Listener]
+// 自定义异步队列监听器
 class AsyncRedisQueueListener implements ListenerInterface
 {
     public function listen(): array
