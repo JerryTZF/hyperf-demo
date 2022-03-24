@@ -31,7 +31,7 @@ class ValidationExceptionHandler extends ExceptionHandler
         $httpBody = $throwable->validator->errors()->first();
 
         return $response->withHeader('Content-Type', 'application/json')
-            ->withStatus(200)->withBody(new SwooleStream(json_encode([
+            ->withStatus(422)->withBody(new SwooleStream(json_encode([
                 'code'   => SystemCode::VALIDATOR_ERR,
                 'msg'    => SystemCode::getMessage(SystemCode::VALIDATOR_ERR) . $httpBody,
                 'status' => false,
