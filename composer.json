@@ -17,7 +17,7 @@
     "endroid/qr-code": "^4.4",
     "gregwar/captcha": "^1.1",
     "hyperf/async-queue": "^2.2",
-    "hyperf/cache": "~2.2.0",
+    "hyperf/cache": "^2.2",
     "hyperf/command": "~2.2.0",
     "hyperf/config": "~2.2.0",
     "hyperf/constants": "^2.2",
@@ -34,8 +34,7 @@
     "hyperf/redis": "~2.2.0",
     "hyperf/signal": "^2.2",
     "hyperf/validation": "^2.2",
-    "picqer/php-barcode-generator": "^2.2",
-    "ext-openssl": "Required to use HTTPS."
+    "picqer/php-barcode-generator": "^2.2"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0",
@@ -50,7 +49,8 @@
     "ext-json": "Required to use JSON.",
     "ext-pdo": "Required to use MySQL Client.",
     "ext-pdo_mysql": "Required to use MySQL Client.",
-    "ext-redis": "Required to use Redis Client."
+    "ext-redis": "Required to use Redis Client.",
+    "ext-openssl": "Required to use HTTPS."
   },
   "autoload": {
     "psr-4": {

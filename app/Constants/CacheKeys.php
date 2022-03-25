@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 /**
  * Created by PhpStorm
- * Time: 2022/3/24 21:58
+ * Time: 2022/3/25 18:44
  * Author: JerryTian<tzfforyou@163.com>
- * File: ErrorCode.php
+ * File: CacheKeys.php
  * Desc:
  */
 
@@ -16,11 +16,9 @@ namespace App\Constants;
 use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
+// 集中定义业务中一些常用的缓存Key
 #[Constants]
-class ErrorCode extends AbstractConstants
+class CacheKeys extends AbstractConstants
 {
-    /**
-     * @Message("您的账号在其他设备登录，请检查")
-     */
-    public const LONG_DISTANCE_LOGIN = 2980;
+    public const IS_USER_LOGON = 'USER_LOGON_%s_%s';
 }

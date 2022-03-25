@@ -24,7 +24,7 @@ class AppExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         // CLI异常输出
-        Log::stdout()->error($throwable->getMessage(), $throwable->getTrace());
+        Log::stdout()->error($throwable->getMessage());
 
         // DISK异常记录
         $errorInfo = sprintf('发生系统异常:%s;行号为:[%s];文件为:[%s]', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile());
