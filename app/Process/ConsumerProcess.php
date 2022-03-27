@@ -37,6 +37,7 @@ class ConsumerProcess extends AbstractProcess
     #[Inject]
     protected EventDispatcherInterface $dispatcher;
 
+    // 演示投递异步消息 && 自定义进程退出
     public function handle(): void
     {
         $index = 0;

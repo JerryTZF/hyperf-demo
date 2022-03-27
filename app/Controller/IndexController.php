@@ -14,7 +14,7 @@ namespace App\Controller;
 
 class IndexController extends AbstractController
 {
-    public function index()
+    public function index(): array
     {
         return [];
     }
