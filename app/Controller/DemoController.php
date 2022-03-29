@@ -22,6 +22,7 @@ use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
+use Hyperf\Utils\Arr;
 use Psr\Http\Message\ResponseInterface;
 
 #[Controller(prefix: "demo")]

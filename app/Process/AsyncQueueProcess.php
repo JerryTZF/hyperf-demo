@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Process;
 
+use Hyperf\AsyncQueue\Process\ConsumerProcess;
 use Hyperf\Process\Annotation\Process;
 
 #[Process(
@@ -21,7 +22,7 @@ use Hyperf\Process\Annotation\Process;
     enableCoroutine: true,
     redirectStdinStdout: false
 )]
-class AsyncQueueProcess extends \Hyperf\AsyncQueue\Process\ConsumerProcess
+class AsyncQueueProcess extends ConsumerProcess
 {
     protected $queue = 'redis-queue';
 }

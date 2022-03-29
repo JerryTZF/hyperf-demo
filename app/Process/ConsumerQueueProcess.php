@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Created by PhpStorm
  * Time: 2022/3/22 14:24
  * Author: JerryTian<tzfforyou@163.com>
- * File: ConsumerProcess.php
+ * File: ConsumerQueueProcess.php
  * Desc:
  */
 
@@ -19,6 +19,7 @@ use App\Job\ConsumerDemoJob;
 use App\Job\ErrorDemoJob;
 use App\Job\StopDemoJob;
 use App\Lib\_RedisQueue\DriverFactory;
+use Exception;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Process\AbstractProcess;
 use Hyperf\Process\Annotation\Process;
@@ -28,11 +29,11 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 
 #[Process(
     nums: 1,
-    name: 'ConsumerProcess',
+    name: 'ConsumerQueueProcess',
     enableCoroutine: true,
     redirectStdinStdout: false
 )]
-class ConsumerProcess extends AbstractProcess
+class ConsumerQueueProcess extends AbstractProcess
 {
     #[Inject]
     protected EventDispatcherInterface $dispatcher;
@@ -49,7 +50,7 @@ class ConsumerProcess extends AbstractProcess
                     throw new ProcessException(500, '自定义进程异常抛出测试');
                 }
                 if ($index === 1) {
-                    for ($i = 200; $i--;) {
+                    for ($i = 1; $i--;) {
                         // 向异步队列中投递消息
                         $driver = DriverFactory::getDriverInstance('redis-queue');
                         $driver->push(new StopDemoJob((string)$i, [$i]));
@@ -57,8 +58,8 @@ class ConsumerProcess extends AbstractProcess
                 }
             }
         } catch (ProcessException $e) {
-            $this->dispatcher->dispatch(new ConsumerProcessFailEvent($e, 'ConsumerProcess'));
-        } catch (\Exception $e) {
+            $this->dispatcher->dispatch(new ConsumerProcessFailEvent($e, 'ConsumerQueueProcess'));
+        } catch (Exception $e) {
             var_dump($e->getMessage());
         }
     }

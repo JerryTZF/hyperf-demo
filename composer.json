@@ -24,6 +24,8 @@
     "hyperf/crontab": "^2.2",
     "hyperf/database": "~2.2.0",
     "hyperf/db-connection": "~2.2.0",
+    "hyperf/filesystem": "^2.2",
+    "hyperf/flysystem-oss": "^1.0",
     "hyperf/framework": "~2.2.0",
     "hyperf/guzzle": "~2.2.0",
     "hyperf/http-server": "~2.2.0",
