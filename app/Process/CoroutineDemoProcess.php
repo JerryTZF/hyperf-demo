@@ -37,7 +37,7 @@ class CoroutineDemoProcess extends AbstractProcess
         while (true) {
             Coroutine::sleep(1);
             if ($flag === 0) {
-                $this->_parallel();
+                $this->_channel();
             }
             if ($flag > 100) {
                 break; // 进程会退出(EXIT=0),但是会重新拉起再次执行
@@ -72,8 +72,10 @@ class CoroutineDemoProcess extends AbstractProcess
     {
         $ch = new Channel(10); // 缓冲管道(类似golang)
         for ($i = 10; $i--;) {
-            Coroutine::create(function () use ($ch) {
+            Coroutine::create(function () use ($ch, $i) {
                 $random = mt_rand(1, 100);
+                Log::stdout()->info('任务: ' . $i . ', 随机数为: ' . $random);
+                Coroutine::sleep($i);
                 $ch->push($random);
             });
         }

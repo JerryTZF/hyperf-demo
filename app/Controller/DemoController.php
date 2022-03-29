@@ -19,8 +19,10 @@ use App\Middleware\CheckTokenMiddleware;
 use App\Service\DemoService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
+use Psr\Http\Message\ResponseInterface;
 
 #[Controller(prefix: "demo")]
 class DemoController extends AbstractController
@@ -71,5 +73,12 @@ class DemoController extends AbstractController
             'single'   => $cacheData,
             'multiple' => $multipleData
         ])->getResult();
+    }
+
+    // 重定向演示
+    #[GetMapping(path: "redirect_2_wiki")]
+    public function redirect(): ResponseInterface
+    {
+        return $this->response->redirect('https://wiki.tzf-foryou.xyz');
     }
 }

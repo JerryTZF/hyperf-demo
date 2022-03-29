@@ -23,4 +23,14 @@ class ErrorCode extends AbstractConstants
      * @Message("您的账号在其他设备登录，请检查")
      */
     public const LONG_DISTANCE_LOGIN = 2980;
+
+    /**
+     * @Message("账户或密码错误")
+     */
+    public const ADMIN_404 = 2981;
+
+    /**
+     * @Message("cookie不存在")
+     */
+    public const COOKIE_NOT_FOUND = 2982;
 }
