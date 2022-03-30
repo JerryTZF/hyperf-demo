@@ -33,4 +33,14 @@ class ErrorCode extends AbstractConstants
      * @Message("cookie不存在")
      */
     public const COOKIE_NOT_FOUND = 2982;
+
+    /**
+     * @Message("文件的Mime或类型不符")
+     */
+    public const FILE_MIME_ERR = 2983;
+
+    /**
+     * @Message("文件名不能为空")
+     */
+    public const FILE_NAME_ERR = 2984;
 }
