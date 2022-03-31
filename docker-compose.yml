@@ -2,9 +2,9 @@ version: "3.5"
 
 services:
   # 本地开发(Mac环境)
-  gift-point-server:
+  hyperf-server:
     build: .
-    container_name: gift-point-server
+    container_name: hyperf-server
     ports:
       - "9500:9501"
     networks:
