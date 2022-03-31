@@ -19,16 +19,12 @@ use App\Lib\_Cache\Cache;
 use App\Lib\_Validator\DemoValidator;
 use App\Middleware\CheckTokenMiddleware;
 use App\Service\DemoService;
-use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Filesystem\FilesystemFactory;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
-use Hyperf\Utils\Arr;
-use Hyperf\Utils\Str;
-use League\Flysystem\FilesystemException;
 use Psr\Http\Message\ResponseInterface;
 
 #[Controller(prefix: "demo")]
@@ -127,7 +123,8 @@ class DemoController extends AbstractController
             // 写入OSS
             $fileName = 'UPLOADER_' . date('YmdHis') . '.' . $file->getExtension();
             $remotePath = DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $fileName;
-            $address = 'https://jerry-markdown.oss-cn-shenzhen.aliyuncs.com/img/' . $fileName;
+            [$endpoint, $bucket] = [env('OSS_ENDPOINT'), env('OSS_BUCKET')];
+            $address = "https://{$bucket}.{$endpoint}/img/" . $fileName;
             $ossInstance->write($remotePath, file_get_contents($file->getRealPath()));
             return $this->result->setData(['address' => $address])->getResult();
         }

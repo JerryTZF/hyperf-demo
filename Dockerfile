@@ -20,6 +20,9 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
 
 # update
 RUN set -ex \
+    && apk update \
+    # 添加imagick扩展
+    && apk add --no-cache php8-imagick \
     # show php version and extensions
     && php -v \
     && php -m \
