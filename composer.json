@@ -36,6 +36,7 @@
     "hyperf/redis": "~2.2.0",
     "hyperf/signal": "^2.2",
     "hyperf/validation": "^2.2",
+    "intervention/image": "^2.7",
     "picqer/php-barcode-generator": "^2.2"
   },
   "require-dev": {

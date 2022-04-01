@@ -25,6 +25,7 @@ use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
+use Intervention\Image\ImageManager;
 use Psr\Http\Message\ResponseInterface;
 
 #[Controller(prefix: "demo")]
@@ -128,6 +129,37 @@ class DemoController extends AbstractController
             $ossInstance->write($remotePath, file_get_contents($file->getRealPath()));
             return $this->result->setData(['address' => $address])->getResult();
         }
+
+        return $this->result->getResult();
+    }
+
+    // 依赖 intervention/image 包 && gd或者imagick扩展
+    // 详见：https://image.intervention.io/v2/usage/overview
+    #[PostMapping(path: "image")]
+    public function interventionImage(): array
+    {
+        $file = $this->request->file('image');
+
+        // TODO 验证图片相关...
+
+        $manager = new ImageManager(['driver' => 'imagick']);
+        $img = $manager->make(file_get_contents($file->getRealPath()));
+        $localPath = BASE_PATH . DIRECTORY_SEPARATOR . 'runtime' . DIRECTORY_SEPARATOR;
+
+        // 这里列举一些常用的操作,所有操作详见文档
+
+        // 1、裁剪图片
+        $img->crop(795, 793, 50, 40);
+        // 2、调整尺寸
+        $img->resize(330, 330, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        // 3、...
+
+        // 输出
+        $img->save($localPath . 'gopher.heic', 95);
 
         return $this->result->getResult();
     }
