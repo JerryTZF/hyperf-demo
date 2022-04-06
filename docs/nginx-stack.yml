@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  nginx-test:
+    image: nginx
+    networks:
+      - proxy
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - "node.role==worker"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.nginx.rule=Host(`nginx.tzf-foryou.com`)"
+        - "traefik.http.routers.nginx.entrypoints=websecure"
+        - "traefik.http.routers.nginx.tls.certresolver=le"
+        - "traefik.http.services.nginx.loadbalancer.server.port=80"
+    configs:
+      - source: index
+        target: /usr/share/nginx/html/index.html
+
+
+networks:
+  proxy:
+    external: true
+
+configs:
+  index:
+    file: /nfsroot/nginx/index.html

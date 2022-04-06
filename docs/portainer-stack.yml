@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+  portainer:
+    image: portainer/portainer
+    networks:
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+      - $PWD/public:/public # 汉化包
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      placement:
+        constraints:
+          - "node.role==manager"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.portainer.rule=Host(`portainer.tzf-foryou.com`)"
+        - "traefik.http.routers.portainer.entrypoints=websecure"
+        - "traefik.http.routers.portainer.tls.certresolver=le"
+        - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  portainer_data:

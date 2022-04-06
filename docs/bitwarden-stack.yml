@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+  bitwarden:
+    image: bitwardenrs/server:latest
+    environment:
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=true
+      - LOG_FILE=/data/bitwarden.log
+      - WEB_VAULT_ENABLED=true
+      - DATABASE_URL=/data/bitwarden.db
+      - INVITATIONS_ALLOWED=true
+    networks:
+      - proxy
+    volumes:
+      - type: volume
+        source: bitwarden_volume
+        target: /data
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.role==manager"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.tzf-foryou.com`)"
+        - "traefik.http.routers.bitwarden.entrypoints=websecure"
+        - "traefik.http.routers.bitwarden.tls.certresolver=le"
+        - "traefik.http.services.bitwarden.loadbalancer.server.port=80"
+
+volumes:
+  bitwarden_volume:
+
+
+networks:
+  proxy:
+    external: true
