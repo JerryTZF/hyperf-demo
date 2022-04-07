@@ -37,6 +37,7 @@
     "hyperf/signal": "^2.2",
     "hyperf/validation": "^2.2",
     "intervention/image": "^2.7",
+    "phpoffice/phpspreadsheet": "^1.22",
     "picqer/php-barcode-generator": "^2.2"
   },
   "require-dev": {

@@ -43,4 +43,14 @@ class ErrorCode extends AbstractConstants
      * @Message("文件名不能为空")
      */
     public const FILE_NAME_ERR = 2984;
+
+    /**
+     * @Message("库存不足")
+     */
+    public const INVENTORY_ERR = 2985;
+
+    /**
+     * @Message("获取锁超时")
+     */
+    public const GET_LOCK_ERR = 2986;
 }

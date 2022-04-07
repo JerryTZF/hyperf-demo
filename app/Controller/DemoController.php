@@ -16,9 +16,14 @@ namespace App\Controller;
 use App\Constants\CacheKeys;
 use App\Constants\ErrorCode;
 use App\Lib\_Cache\Cache;
+use App\Lib\_Lock\RedisLock;
+use App\Lib\_Log\Log;
 use App\Lib\_Validator\DemoValidator;
 use App\Middleware\CheckTokenMiddleware;
+use App\Model\Good;
+use App\Model\SaleRecords;
 use App\Service\DemoService;
+use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Filesystem\FilesystemFactory;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -160,6 +165,73 @@ class DemoController extends AbstractController
 
         // 输出
         $img->save($localPath . 'gopher.heic', 95);
+
+        return $this->result->getResult();
+    }
+
+    #[GetMapping(path: "sql_lock")]
+    public function sqlLock(): array
+    {
+        $buyer = $this->request->input('buyer');
+        try {
+            Db::beginTransaction();
+            /** @var Good $dove */
+            $dove = Good::query()->where(['g_name' => '德芙巧克力(200g)'])->lockForUpdate()->first();
+
+            if ($dove->g_inventory > 0) {
+                (new SaleRecords([
+                    'gid'      => $dove->id,
+                    'order_no' => date('YmdHis') . uniqid(),
+                    'buyer'    => $buyer,
+                    'amount'   => $dove->g_price
+                ]))->save();
+
+                $dove->g_inventory -= 1;
+            } else {
+                Db::commit();
+                [$e, $m] = [ErrorCode::INVENTORY_ERR, ErrorCode::getMessage(ErrorCode::INVENTORY_ERR)];
+                return $this->result->setErrorInfo($e, $m)->getResult();
+            }
+            $dove->save();
+            Db::commit();
+        } catch (\Exception $e) {
+            Db::rollBack();
+            return $this->result->setErrorInfo($e->getCode(), $e->getMessage())->getResult();
+        }
+
+        return $this->result->getResult();
+    }
+
+    #[GetMapping(path: "redis_lock")]
+    public function redisLock(): array
+    {
+        $buyer = $this->request->input('buyer');
+
+        $isGetLock = RedisLock::muxLock(key: $buyer);
+        if (!$isGetLock) {
+            [$e, $m] = [ErrorCode::GET_LOCK_ERR, ErrorCode::getMessage(ErrorCode::GET_LOCK_ERR)];
+            return $this->result->setErrorInfo($e, $m)->getResult();
+        }
+        defer(function () use ($buyer) {
+            RedisLock::muxUnlock(key: $buyer);
+        });
+
+        /** @var Good $dove */
+        $dove = Good::query()->where(['g_name' => '德芙巧克力(200g)'])->first();
+        if ($dove->g_inventory > 0) {
+            (new SaleRecords([
+                'gid'      => $dove->id,
+                'order_no' => date('YmdHis') . uniqid(),
+                'buyer'    => $buyer,
+                'amount'   => $dove->g_price
+            ]))->save();
+
+            $dove->g_inventory -= 1;
+            $dove->save();
+        } else {
+            [$e, $m] = [ErrorCode::INVENTORY_ERR, ErrorCode::getMessage(ErrorCode::INVENTORY_ERR)];
+            return $this->result->setErrorInfo($e, $m)->getResult();
+        }
 
         return $this->result->getResult();
     }
