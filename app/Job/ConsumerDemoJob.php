@@ -32,7 +32,7 @@ class ConsumerDemoJob extends AbstractJob
         // 被放入timeout队列，但是看控制台可以看到开始、进行中、结束，所以：超时不一定是失败！！！
         Coroutine::sleep(1);
         Log::stdout()->info("任务ID:{$this->uniqueId}--开始");
-        Coroutine::sleep(10);
+        Coroutine::sleep(1);
         Log::stdout()->info("任务ID:{$this->uniqueId}--进行中");
         Coroutine::sleep(1);
         Log::stdout()->info("任务ID:{$this->uniqueId}--结束");

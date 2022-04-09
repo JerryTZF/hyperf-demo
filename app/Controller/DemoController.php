@@ -15,9 +15,10 @@ namespace App\Controller;
 
 use App\Constants\CacheKeys;
 use App\Constants\ErrorCode;
+use App\Job\OversoldJob;
 use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
-use App\Lib\_Log\Log;
+use App\Lib\_RedisQueue\DriverFactory;
 use App\Lib\_Validator\DemoValidator;
 use App\Middleware\CheckTokenMiddleware;
 use App\Model\Good;
@@ -233,6 +234,14 @@ class DemoController extends AbstractController
             return $this->result->setErrorInfo($e, $m)->getResult();
         }
 
+        return $this->result->getResult();
+    }
+
+    #[GetMapping(path: "queue_lock")]
+    public function rateLimit(): array
+    {
+        $driver = DriverFactory::getDriverInstance('limit-queue');
+        $driver->push(new OversoldJob(uniqid(), []));
         return $this->result->getResult();
     }
 }
