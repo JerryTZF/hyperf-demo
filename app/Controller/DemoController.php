@@ -18,6 +18,7 @@ use App\Constants\ErrorCode;
 use App\Job\OversoldJob;
 use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
+use App\Lib\_Office\ExportExcelHandler;
 use App\Lib\_RedisQueue\DriverFactory;
 use App\Lib\_Validator\DemoValidator;
 use App\Middleware\CheckTokenMiddleware;
@@ -243,5 +244,19 @@ class DemoController extends AbstractController
         $driver = DriverFactory::getDriverInstance('limit-queue');
         $driver->push(new OversoldJob(uniqid(), []));
         return $this->result->getResult();
+    }
+
+    #[GetMapping(path: "export_excel")]
+    public function exportExcel()
+    {
+        $excelHandler = new ExportExcelHandler();
+        $excelHandler->setHeaders([
+            'id', '商品ID', '订单号', '购买者', '价格', '创建时间', '变更时间'
+        ]);
+        SaleRecords::query()->orderBy('id')
+            ->chunk(20, function ($records) use ($excelHandler) {
+                $excelHandler->setData($records->toArray());
+            });
+        return $excelHandler->saveToBrowser('测试导出');
     }
 }
