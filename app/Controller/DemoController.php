@@ -18,6 +18,7 @@ use App\Constants\ErrorCode;
 use App\Job\OversoldJob;
 use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
+use App\Lib\_Office\ExportCsvHandler;
 use App\Lib\_Office\ExportExcelHandler;
 use App\Lib\_RedisQueue\DriverFactory;
 use App\Lib\_Validator\DemoValidator;
@@ -247,7 +248,8 @@ class DemoController extends AbstractController
     }
 
     #[GetMapping(path: "export_excel")]
-    public function exportExcel()
+    // 导出CSV同理,API都是统一的,Handler不一样而已
+    public function exportExcel(): ResponseInterface
     {
         $excelHandler = new ExportExcelHandler();
         $excelHandler->setHeaders([
