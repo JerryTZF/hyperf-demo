@@ -17,10 +17,9 @@ use App\Lib\_Log\Log;
 use Hyperf\Contract\OnCloseInterface;
 use Hyperf\Contract\OnMessageInterface;
 use Hyperf\Contract\OnOpenInterface;
+use Hyperf\Utils\Arr;
 use Swoole\Http\Request;
-use Swoole\Server;
 use Swoole\Websocket\Frame;
-use Swoole\WebSocket\Server as WebSocketServer;
 
 class WebSocketController implements OnMessageInterface, OnOpenInterface, OnCloseInterface
 {
@@ -38,6 +37,12 @@ class WebSocketController implements OnMessageInterface, OnOpenInterface, OnClos
 
     public function onOpen($server, Request $request): void
     {
-        $server->push($request->fd, "{$request->fd}号已经连接成功");
+        $token = Arr::get($request->get, 'token', '');
+        // 添加你自己的校验 【注意】本应该在handshake里面实现,这里偷一下懒 :(
+        if ($token === 'joker') {
+            $server->push($request->fd, "{$request->fd}号已经连接成功");
+        } else {
+            $server->close($request->fd);
+        }
     }
 }
