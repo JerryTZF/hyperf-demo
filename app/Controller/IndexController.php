@@ -16,6 +16,6 @@ class IndexController extends AbstractController
 {
     public function index(): array
     {
-        return [];
+        return $this->result->getResult();
     }
 }

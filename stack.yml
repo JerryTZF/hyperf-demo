@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  hyperf:
+    image: registry.cn-shenzhen.aliyuncs.com/jerry-dev/hyperf-demo:v1.0.0
+    networks:
+      - proxy
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      placement:
+        constraints:
+          - "node.role==manager"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.hyperf.rule=Host(`hyperf.xxxx.xyz`)"
+        - "traefik.http.routers.hyperf.entrypoints=websecure"
+        - "traefik.http.routers.hyperf.tls.certresolver=le"
+        - "traefik.http.services.hyperf.loadbalancer.server.port=9501"
+        - "traefik.ws.routers.hyperf-ws.rule=Host(`hyperf.xxx.xyz`)"
+        - "traefik.ws.routers.hyperf-ws.entrypoints=ws"
+        - "traefik.ws.routers.hyperf-ws.tls.certresolver=le"
+        - "traefik.ws.services.hyperf-ws.loadbalancer.server.port=9502"
+
+networks:
+  proxy:
+    external: true

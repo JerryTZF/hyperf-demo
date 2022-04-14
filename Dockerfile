@@ -53,5 +53,6 @@ COPY . /opt/www
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
+EXPOSE 9502
 
 ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
