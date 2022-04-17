@@ -1,0 +1,33 @@
+groups:
+- name: hostStatsAlert
+  rules:
+  - alert: 服务器CPU告警
+    expr: (100 - avg (rate(node_cpu_seconds_total{job="agent",mode="idle"}[5m])) by (instance) * 100) > 80
+    for: 50s
+    labels:
+      severity: warning
+    annotations:
+      summary: "服务器实例：{{ $labels.instance }} CPU使用率过高"
+      description: "服务器 {{ $labels.instance }} CPU使用率五分钟负载超过80% (当前值为: {{ $value }})"
+      username: "Jerry"
+
+  - alert: 服务器内存告警    
+    expr: ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)/node_memory_MemTotal_bytes)*100 > 80
+    for: 50s
+    labels:
+      severity: warning
+    annotations:
+      summary: "服务器实例：{{ $labels.instance }} 内存使用率过高"
+      description: "服务器 {{ $labels.instance }} 内存使用率超过 80% (当前值为: {{ $value }})"
+      username: "Jerry"
+
+  - alert: 服务器磁盘告警
+    expr: (node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) / node_filesystem_size_bytes{mountpoint="/"} * 100 > 80
+    for: 50s
+    labels:
+      severity: warning
+    annotations:
+      summary: "服务器实例：{{ $labels.instance }} 分区使用率过高"
+      description: "服务器 {{ $labels.instance }} 磁盘分区使用率超过 80% (当前值为: {{ $value }})"
+      username: "Jerry"
+

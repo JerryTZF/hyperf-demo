@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.28.0
+    networks:
+      - proxy
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - "node.role==manager"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.prometheus.rule=Host(`prometheus.xxxx.xyz`)"
+        - "traefik.http.routers.prometheus.entrypoints=websecure"
+        - "traefik.http.routers.prometheus.tls.certresolver=le"
+        - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    volumes:
+      - $PWD/rules:/etc/prometheus/rules
+
+networks:
+  proxy:
+    external: true
+
+configs:
+  prometheus:
+    file: /home/swarm/prometheus/prometheus.yml

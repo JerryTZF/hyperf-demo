@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  grafana:
+    image: grafana/grafana:8.0.3
+    networks:
+      - proxy
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - "node.role==manager"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.grafana.rule=Host(`grafana.xxx.xyz`)"
+        - "traefik.http.routers.grafana.entrypoints=websecure"
+        - "traefik.http.routers.grafana.tls.certresolver=le"
+        - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    configs:
+      - source: grafana
+        target: /etc/grafana/grafana.ini
+
+networks:
+  proxy:
+    external: true
+configs:
+  grafana:
+    file: /home/swarm/grafana/grafana.ini

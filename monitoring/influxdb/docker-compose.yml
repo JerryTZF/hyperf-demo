@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    volumes:
+      - $PWD/influxdb.conf:/etc/influxdb/influxdb.conf
+      - $PWD/influxdb:/var/lib/influxdb
+    ports:
+      - "8086:8086"
+    command: -config /etc/influxdb/influxdb.conf
+    environment:
+      - INFLUXDB_DB=prometheus
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_USER=root
+      - INFLUXDB_USER_PASSWORD=tengxunyuntx01

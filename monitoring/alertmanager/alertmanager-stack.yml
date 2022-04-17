@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+  alertmanager:
+    image: docker.io/prom/alertmanager:latest
+    networks:
+      - proxy
+    ports:
+      - "9093:9093"
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - "node.role==manager"
+    volumes:
+      - $PWD/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - $PWD/storage:/data/alertmanager/storage
+      - $PWD/template:/etc/alertmanager/template
+
+networks:
+  proxy:
+    external: true
