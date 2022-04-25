@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  mysql-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysqld-exporter
+    ports:
+      - "9104:9104"
+    restart: always
+    environment:
+      - DATA_SOURCE_NAME=用户名:密码@(IP:端口)/

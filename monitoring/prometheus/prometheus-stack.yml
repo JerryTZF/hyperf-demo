@@ -12,7 +12,7 @@ services:
           - "node.role==manager"
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.prometheus.rule=Host(`prometheus.xxxx.xyz`)"
+        - "traefik.http.routers.prometheus.rule=Host(`prometheus.example.xyz`)"
         - "traefik.http.routers.prometheus.entrypoints=websecure"
         - "traefik.http.routers.prometheus.tls.certresolver=le"
         - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
@@ -28,4 +28,4 @@ networks:
 
 configs:
   prometheus:
-    file: /home/swarm/prometheus/prometheus.yml
+    file: /home/monitoring/prometheus/prometheus.yml

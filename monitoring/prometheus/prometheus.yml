@@ -1,18 +1,7 @@
+# Prometheus全局配置项
 global:
-  scrape_interval: 15s # By default, scrape targets every 15 seconds.
-
-
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-    monitor: 'codelab-monitor'
-
-# influxdb配置；需在influxdb中创建好db
-remote_write:
-  - url: "http://xxx.xxx.xxx.xxx:8086/api/v1/prom/write?db=prometheus&u=root&p=*****"
-
-remote_read:
-  - url: "http://xxx.xxx.xxx.xxx:8086/api/v1/prom/read?db=prometheus&u=root&p=*****"
+  scrape_interval: 15s # 默认抓取周期，可用单位ms、smhdwy #设置每15s采集数据一次，默认1分钟
+  evaluation_interval: 15s # 估算规则的默认周期 # 每15秒计算一次规则。默认1分钟
 
 rule_files:
   - "./rules/*.yml"
@@ -21,26 +10,21 @@ rule_files:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: ['xxx.xxx.xxx.xxx:9093']
+        - targets: [ 'xx.xx.xx.xx:9093' ]
 
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
+# 配置抓取
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
-
     static_configs:
-      - targets: ['localhost:9090']
-
+      - targets: [ 'localhost:9090' ]
+        labels:
+          appname: 'prometheus'
   - job_name: 'agent'
-    # 基本认证(启动node_exporter时配置的用户名密码)
-    basic_auth:
-      username: username
-      password: password
-
+    metrics_path: /metrics
     static_configs:
-      # 需要监控服务器
-      - targets: ['xxx.xxx.xxx.xxx:9100', 'yyy.yyy.yyy.yyy:9100','zzz.zzz.zzz.zzz:9100']
+      - targets: [ 'xx.xx.xx.xx:9100', 'xx.xx.xx.xx:9100','xx.xx.xx.xx:9100' ]
+  - job_name: 'mysql'
+    metrics_path: /metrics
+    static_configs:
+      - targets: [ 'xx.xx.xx.xx:9104','xx.xx.xx.xx:9104' ]

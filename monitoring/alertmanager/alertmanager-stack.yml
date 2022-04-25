@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   alertmanager:
-    image: docker.io/prom/alertmanager:latest
+    image: prom/alertmanager:latest
     networks:
       - proxy
     ports:
