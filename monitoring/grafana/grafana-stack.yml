@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   grafana:
-    image: grafana/grafana:8.0.3
+    image: grafana/grafana
     networks:
       - proxy
     deploy:
