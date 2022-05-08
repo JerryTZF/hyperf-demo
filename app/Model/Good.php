@@ -19,6 +19,7 @@ namespace App\Model;
  * @property string $g_flag
  * @property int $g_inventory
  * @property float $g_price
+ * @property string $version
  * @property string $create_time
  * @property string $modify_time
  * @package App\Model

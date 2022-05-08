@@ -2114,16 +2114,16 @@
         },
         {
             "name": "hyperf/database",
-            "version": "v2.2.27",
+            "version": "v2.2.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/database.git",
-                "reference": "9fd0977909d9696efba42f3eee9c9cce596c8d56"
+                "reference": "e5b75e3aa889227f869739a2fd54db94b482b7e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/database/zipball/9fd0977909d9696efba42f3eee9c9cce596c8d56",
-                "reference": "9fd0977909d9696efba42f3eee9c9cce596c8d56",
+                "url": "https://api.github.com/repos/hyperf/database/zipball/e5b75e3aa889227f869739a2fd54db94b482b7e0",
+                "reference": "e5b75e3aa889227f869739a2fd54db94b482b7e0",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2173,7 +2173,7 @@
                 "pull-request": "https://github.com/hyperf/hyperf/pulls",
                 "source": "https://github.com/hyperf/hyperf"
             },
-            "time": "2022-03-07T02:06:01+00:00"
+            "time": "2022-03-10T07:58:49+00:00"
         },
         {
             "name": "hyperf/db-connection",
@@ -3761,16 +3761,16 @@
         },
         {
             "name": "hyperf/websocket-server",
-            "version": "v2.2.26",
+            "version": "v2.2.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/websocket-server.git",
-                "reference": "618c693c03171259fe9d6fd5f89d8b951e6a0bfc"
+                "reference": "61c7735ff4f08447d96e8dadc7e3c95947c830a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/websocket-server/zipball/618c693c03171259fe9d6fd5f89d8b951e6a0bfc",
-                "reference": "618c693c03171259fe9d6fd5f89d8b951e6a0bfc",
+                "url": "https://api.github.com/repos/hyperf/websocket-server/zipball/61c7735ff4f08447d96e8dadc7e3c95947c830a1",
+                "reference": "61c7735ff4f08447d96e8dadc7e3c95947c830a1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3820,7 +3820,7 @@
                 "pull-request": "https://github.com/hyperf/hyperf/pulls",
                 "source": "https://github.com/hyperf/hyperf"
             },
-            "time": "2022-02-11T09:45:53+00:00"
+            "time": "2022-04-15T08:32:18+00:00"
         },
         {
             "name": "intervention/image",
@@ -5050,16 +5050,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.22.0",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "3a9e29b4f386a08a151a33578e80ef1747037a48"
+                "reference": "21e4cf62699eebf007db28775f7d1554e612ed9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/3a9e29b4f386a08a151a33578e80ef1747037a48",
-                "reference": "3a9e29b4f386a08a151a33578e80ef1747037a48",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/21e4cf62699eebf007db28775f7d1554e612ed9e",
+                "reference": "21e4cf62699eebf007db28775f7d1554e612ed9e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5089,7 +5089,7 @@
                 "php": "^7.3 || ^8.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/simple-cache": "^1.0"
+                "psr/simple-cache": "^1.0 || ^2.0"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "dev-master",
@@ -5154,9 +5154,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.22.0"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.23.0"
             },
-            "time": "2022-02-18T12:57:07+00:00"
+            "time": "2022-04-24T13:53:10+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -5237,16 +5237,16 @@
         },
         {
             "name": "picqer/php-barcode-generator",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/picqer/php-barcode-generator.git",
-                "reference": "49022793ff09569c57a2621ba58a191db5a421c4"
+                "reference": "877fcb0e9279ac40646361a7d7a7c6d0e1639836"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/picqer/php-barcode-generator/zipball/49022793ff09569c57a2621ba58a191db5a421c4",
-                "reference": "49022793ff09569c57a2621ba58a191db5a421c4",
+                "url": "https://api.github.com/repos/picqer/php-barcode-generator/zipball/877fcb0e9279ac40646361a7d7a7c6d0e1639836",
+                "reference": "877fcb0e9279ac40646361a7d7a7c6d0e1639836",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5317,7 +5317,7 @@
             ],
             "support": {
                 "issues": "https://github.com/picqer/php-barcode-generator/issues",
-                "source": "https://github.com/picqer/php-barcode-generator/tree/v2.2.1"
+                "source": "https://github.com/picqer/php-barcode-generator/tree/v2.2.2"
             },
             "funding": [
                 {
@@ -5325,7 +5325,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-07T09:48:37+00:00"
+            "time": "2022-05-06T07:19:24+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -10287,16 +10287,16 @@
         },
         {
             "name": "swoole/ide-helper",
-            "version": "4.8.7",
+            "version": "4.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swoole/ide-helper.git",
-                "reference": "62d306dcfdb7c2cd21768386955af9de387163f9"
+                "reference": "8f82ba3b6af04a5bccb97c1654af992d1ee8b0fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swoole/ide-helper/zipball/62d306dcfdb7c2cd21768386955af9de387163f9",
-                "reference": "62d306dcfdb7c2cd21768386955af9de387163f9",
+                "url": "https://api.github.com/repos/swoole/ide-helper/zipball/8f82ba3b6af04a5bccb97c1654af992d1ee8b0fe",
+                "reference": "8f82ba3b6af04a5bccb97c1654af992d1ee8b0fe",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -10319,7 +10319,7 @@
             "description": "IDE help files for Swoole.",
             "support": {
                 "issues": "https://github.com/swoole/ide-helper/issues",
-                "source": "https://github.com/swoole/ide-helper/tree/4.8.7"
+                "source": "https://github.com/swoole/ide-helper/tree/4.8.9"
             },
             "funding": [
                 {
@@ -10331,7 +10331,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-23T01:04:01+00:00"
+            "time": "2022-04-18T20:38:04+00:00"
         },
         {
             "name": "symfony/event-dispatcher",

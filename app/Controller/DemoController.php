@@ -18,7 +18,6 @@ use App\Constants\ErrorCode;
 use App\Job\OversoldJob;
 use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
-use App\Lib\_Office\ExportCsvHandler;
 use App\Lib\_Office\ExportExcelHandler;
 use App\Lib\_RedisQueue\DriverFactory;
 use App\Lib\_Validator\DemoValidator;
@@ -172,10 +171,76 @@ class DemoController extends AbstractController
         return $this->result->getResult();
     }
 
-    #[GetMapping(path: "sql_lock")]
-    public function sqlLock(): array
+    #[GetMapping(path: "optimistic_locking")]
+    public function optimisticLock(): array
     {
-        $buyer = $this->request->input('buyer');
+        /** @var Good $goodInfo */
+        $goodInfo = Db::table('good')
+            ->where(['g_name' => '红富士苹果'])
+            ->select(['id', 'version', 'g_price'])
+            ->first();
+        $rows = Db::table('good')
+            ->where(['id' => $goodInfo->id, 'version' => $goodInfo->version])
+            ->where('g_inventory', '>', 0)
+            ->decrement('g_inventory', 1, ['version' => (string)(intval($goodInfo->version) + 1)]);
+
+        if ($rows !== 0) {
+            (new SaleRecords([
+                'gid'      => $goodInfo->id,
+                'order_no' => date('YmdHis') . uniqid(),
+                'buyer'    => uniqid(),
+                'amount'   => $goodInfo->g_price
+            ]))->save();
+
+            return $this->result->getResult();
+        }
+
+        [$e, $m] = [ErrorCode::INVENTORY_ERR, ErrorCode::getMessage(ErrorCode::INVENTORY_ERR)];
+        return $this->result
+            ->setErrorInfo($e, $m)
+            ->getResult();
+    }
+
+    #[GetMapping(path: "share_mode_lock")]
+    public function shareModeLock(): array
+    {
+        try {
+            Db::beginTransaction();
+            /** 上共享锁 @var Good $dove */
+            $dove = Good::where(['g_name' => '德芙巧克力(200g)'])->sharedLock()->first();
+            // 库存是否充足
+            if ($dove->g_inventory > 0) {
+                // 插入记录表购买记录
+                (new SaleRecords([
+                    'gid'      => $dove->id,
+                    'order_no' => date('YmdHis') . uniqid(),
+                    'buyer'    => uniqid(),
+                    'amount'   => $dove->g_price
+                ]))->save();
+                // 扣减库存
+                $dove->g_inventory -= 1;
+            } else {
+                // 库存不足,提交事务,释放共享锁
+                Db::commit();
+                [$e, $m] = [ErrorCode::INVENTORY_ERR, ErrorCode::getMessage(ErrorCode::INVENTORY_ERR)];
+                return $this->result->setErrorInfo($e, $m)->getResult();
+            }
+            // 更新数据
+            $dove->save();
+            // 提交事务,释放共享锁
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚,释放共享锁
+            Db::rollBack();
+            return $this->result->setErrorInfo($e->getCode(), $e->getMessage())->getResult();
+        }
+
+        return $this->result->getResult();
+    }
+
+    #[GetMapping(path: "for_update_lock")]
+    public function forUpdateLock(): array
+    {
         try {
             Db::beginTransaction();
             /** @var Good $dove */
@@ -185,7 +250,7 @@ class DemoController extends AbstractController
                 (new SaleRecords([
                     'gid'      => $dove->id,
                     'order_no' => date('YmdHis') . uniqid(),
-                    'buyer'    => $buyer,
+                    'buyer'    => uniqid(),
                     'amount'   => $dove->g_price
                 ]))->save();
 
