@@ -275,13 +275,15 @@ class DemoController extends AbstractController
     {
         $buyer = $this->request->input('buyer');
 
-        $isGetLock = RedisLock::muxLock(key: $buyer);
+        // 创建当前协程的唯一值
+        $clientID = uniqid();
+        $isGetLock = RedisLock::muxLock(uniqueID: $clientID, key: $buyer);
         if (!$isGetLock) {
             [$e, $m] = [ErrorCode::GET_LOCK_ERR, ErrorCode::getMessage(ErrorCode::GET_LOCK_ERR)];
             return $this->result->setErrorInfo($e, $m)->getResult();
         }
-        defer(function () use ($buyer) {
-            RedisLock::muxUnlock(key: $buyer);
+        defer(function () use ($buyer, $clientID) {
+            RedisLock::muxUnlock(uniqueID: $clientID, key: $buyer);
         });
 
         /** @var Good $dove */

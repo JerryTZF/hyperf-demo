@@ -50,7 +50,7 @@ class ConsumerQueueProcess extends AbstractProcess
                     throw new ProcessException(500, '自定义进程异常抛出测试');
                 }
                 if ($index === 1) {
-                    for ($i = 1; $i--;) {
+                    for ($i = 500; $i--;) {
                         // 向异步队列中投递消息
                         $driver = DriverFactory::getDriverInstance('redis-queue');
                         $driver->push(new StopDemoJob((string)$i, [$i]));

@@ -25,7 +25,7 @@ class RedisLock
     private static string $lockValue = 'xxx';
 
     // 尝试获取锁
-    public static function muxLock(int $ttl = 5, float $timeout = 2.5, string $key = ''): bool
+    public static function muxLock(string $uniqueID, int $ttl = 5, float $timeout = 2.5, string $key = ''): bool
     {
         [$redis, $time] = [ApplicationContext::getContainer()->get(Redis::class), 0];
 
@@ -33,12 +33,20 @@ class RedisLock
             $key = self::$lockKey;
         }
 
+        // $ttl 请根据你的任务完成大概需要耗时来设定;
+
         while (true) {
             // 抢占式抢夺独占锁
-            if ($redis->setnx($key, 'PREEMPTIVE')) {
-                $redis->setex($key, $ttl, self::$lockValue);
+            // set key clientID NX EX (原子操作)
+            if ($redis->set($key, $uniqueID, ['nx', 'ex' => $ttl])) {
                 return true;
             }
+
+            // 废弃(redis's version > 2.6.12);
+//            if ($redis->setnx($key, 'PREEMPTIVE')) {
+//                $redis->setex($key, $ttl, self::$lockValue);
+//                return true;
+//            }
 
             if ($time > $timeout) {
                 // 大量请求抢占锁时,一直未抢到锁的线程(协程)会等待时间非常长,所以需要增加超时时间处理
@@ -52,13 +60,12 @@ class RedisLock
     }
 
     // 释放锁
-    public static function muxUnlock($key = ''): void
+    public static function muxUnlock(string $uniqueID, string $key = ''): void
     {
         $redis = ApplicationContext::getContainer()->get(Redis::class);
-        if ($key === '') {
-            $redis->del(self::$lockKey);
-        } else {
-            $redis->del($key);
+
+        if ($redis->get($key) === $uniqueID) {
+            $key === '' ? $redis->del(self::$lockKey) : $redis->del($key);
         }
     }
 }
