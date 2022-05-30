@@ -54,6 +54,7 @@ class CoroutineDemoProcess extends AbstractProcess
             $cid = Coroutine::create(function () use ($i) {
                 // 注意:虽然打印了日志,但是这里是不会执行的,
                 // 因为是异步,主协程已经执行完了(没有协程切换)
+
                 Log::stdout()->info("第{$i}个任务正在执行");
                 Coroutine::sleep(mt_rand(0, 5));
             });
