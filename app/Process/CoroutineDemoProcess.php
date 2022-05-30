@@ -37,7 +37,7 @@ class CoroutineDemoProcess extends AbstractProcess
         while (true) {
             Coroutine::sleep(1);
             if ($flag === 0) {
-//                $this->_channel();
+                $this->_channel();
             }
             if ($flag > 1000000) {
                 break; // 进程会退出(EXIT=0),但是会重新拉起再次执行
