@@ -81,6 +81,7 @@ class CoroutineDemoProcess extends AbstractProcess
             });
         }
 
+
         $sum = 0;
         while (true) {
             Coroutine::sleep(1.0);
