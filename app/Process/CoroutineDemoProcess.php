@@ -97,6 +97,7 @@ class CoroutineDemoProcess extends AbstractProcess
                 assert($ch->errCode === SWOOLE_CHANNEL_TIMEOUT);
                 break;
             }
+
         }
 
         Log::stdout()->warning("管道pop数据总和为:   $sum");
