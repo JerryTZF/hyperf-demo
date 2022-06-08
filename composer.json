@@ -40,7 +40,8 @@
     "hyperf/websocket-server": "^2.2",
     "intervention/image": "^2.7",
     "phpoffice/phpspreadsheet": "^1.22",
-    "picqer/php-barcode-generator": "^2.2"
+    "picqer/php-barcode-generator": "^2.2",
+    "w7corp/easywechat": "^6.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0",

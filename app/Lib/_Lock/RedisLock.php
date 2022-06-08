@@ -20,9 +20,7 @@ use Hyperf\Utils\Coroutine;
 // 分布式锁
 class RedisLock
 {
-    private static string $lockKey = 'xxx';
-
-    private static string $lockValue = 'xxx';
+    private static string $lockKey = 'redis_lock';
 
     // 尝试获取锁
     public static function muxLock(string $uniqueID, int $ttl = 5, float $timeout = 2.5, string $key = ''): bool
@@ -41,12 +39,6 @@ class RedisLock
             if ($redis->set($key, $uniqueID, ['nx', 'ex' => $ttl])) {
                 return true;
             }
-
-            // 废弃(redis's version > 2.6.12);
-//            if ($redis->setnx($key, 'PREEMPTIVE')) {
-//                $redis->setex($key, $ttl, self::$lockValue);
-//                return true;
-//            }
 
             if ($time > $timeout) {
                 // 大量请求抢占锁时,一直未抢到锁的线程(协程)会等待时间非常长,所以需要增加超时时间处理
