@@ -16,6 +16,7 @@ namespace App\Controller;
 use App\Constants\CacheKeys;
 use App\Constants\ErrorCode;
 use App\Job\OversoldJob;
+use App\Job\StopDemoJob;
 use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
 use App\Lib\_Office\ExportExcelHandler;
@@ -81,7 +82,7 @@ class DemoController extends AbstractController
         $cache->clear();
 
         return $this->result->setData([
-            'single'   => $cacheData,
+            'single' => $cacheData,
             'multiple' => $multipleData
         ])->getResult();
     }
@@ -186,10 +187,10 @@ class DemoController extends AbstractController
 
         if ($rows !== 0) {
             (new SaleRecords([
-                'gid'      => $goodInfo->id,
+                'gid' => $goodInfo->id,
                 'order_no' => date('YmdHis') . uniqid(),
-                'buyer'    => uniqid(),
-                'amount'   => $goodInfo->g_price
+                'buyer' => uniqid(),
+                'amount' => $goodInfo->g_price
             ]))->save();
 
             return $this->result->getResult();
@@ -212,10 +213,10 @@ class DemoController extends AbstractController
             if ($dove->g_inventory > 0) {
                 // 插入记录表购买记录
                 (new SaleRecords([
-                    'gid'      => $dove->id,
+                    'gid' => $dove->id,
                     'order_no' => date('YmdHis') . uniqid(),
-                    'buyer'    => uniqid(),
-                    'amount'   => $dove->g_price
+                    'buyer' => uniqid(),
+                    'amount' => $dove->g_price
                 ]))->save();
                 // 扣减库存
                 $dove->g_inventory -= 1;
@@ -248,10 +249,10 @@ class DemoController extends AbstractController
 
             if ($dove->g_inventory > 0) {
                 (new SaleRecords([
-                    'gid'      => $dove->id,
+                    'gid' => $dove->id,
                     'order_no' => date('YmdHis') . uniqid(),
-                    'buyer'    => uniqid(),
-                    'amount'   => $dove->g_price
+                    'buyer' => uniqid(),
+                    'amount' => $dove->g_price
                 ]))->save();
 
                 $dove->g_inventory -= 1;
@@ -290,10 +291,10 @@ class DemoController extends AbstractController
         $dove = Good::query()->where(['g_name' => '德芙巧克力(200g)'])->first();
         if ($dove->g_inventory > 0) {
             (new SaleRecords([
-                'gid'      => $dove->id,
+                'gid' => $dove->id,
                 'order_no' => date('YmdHis') . uniqid(),
-                'buyer'    => $buyer,
-                'amount'   => $dove->g_price
+                'buyer' => $buyer,
+                'amount' => $dove->g_price
             ]))->save();
 
             $dove->g_inventory -= 1;
@@ -327,5 +328,19 @@ class DemoController extends AbstractController
                 $excelHandler->setData($records->toArray());
             });
         return $excelHandler->saveToBrowser('测试导出');
+    }
+
+    #[GetMapping(path: "async_demo")]
+    public function asyncDemo(): array
+    {
+        $driver = DriverFactory::getDriverInstance('redis-queue');
+        for ($i = 10; $i--;) {
+            go(function () use ($driver, $i) {
+                for ($j = 200; $j--;) {
+                    $driver->push(new StopDemoJob("group:{$i};index:{$j};", []));
+                }
+            });
+        }
+        return $this->result->getResult();
     }
 }

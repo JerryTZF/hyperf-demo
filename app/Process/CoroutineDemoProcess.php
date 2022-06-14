@@ -22,12 +22,12 @@ use Hyperf\Utils\Coroutine;
 use Hyperf\Utils\Exception\ParallelExecutionException;
 use Hyperf\Utils\Parallel;
 
-#[Process(
-    nums: 1,
-    name: 'CoroutineDemoProcess',
-    enableCoroutine: true,
-    redirectStdinStdout: false
-)]
+//#[Process(
+//    nums: 1,
+//    name: 'CoroutineDemoProcess',
+//    enableCoroutine: true,
+//    redirectStdinStdout: false
+//)]
 class CoroutineDemoProcess extends AbstractProcess
 {
     // 演示协程基本使用

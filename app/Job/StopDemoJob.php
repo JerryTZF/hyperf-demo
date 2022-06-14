@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Job;
 
+use App\Lib\_Log\Log;
 use App\Lib\_Redis\Redis;
 use Hyperf\Utils\Coroutine;
 
@@ -28,7 +29,14 @@ class StopDemoJob extends AbstractJob
     // 往队列投递较多的task即可
     public function handle()
     {
-        Coroutine::sleep(5);
-        (Redis::getRedisInstance())->incr('test');
+        // 停止服务会有问题的场景
+        Coroutine::sleep(1);
+        (Redis::getRedisInstance())->incr('work_1');
+        Coroutine::sleep(1);
+        (Redis::getRedisInstance())->incr('work_2');
+        Log::stdout()->info("第 {$this->uniqueId} 号消息被消费成功!!!");
+
+        // 原子性消息
+
     }
 }

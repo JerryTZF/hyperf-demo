@@ -16,7 +16,6 @@ namespace App\Process;
 use App\Exception\ProcessException;
 use App\Hook\ConsumerProcessFailEvent;
 use App\Job\ConsumerDemoJob;
-use App\Job\ErrorDemoJob;
 use App\Job\StopDemoJob;
 use App\Lib\_RedisQueue\DriverFactory;
 use Exception;
@@ -27,12 +26,12 @@ use Hyperf\Process\ProcessManager;
 use Hyperf\Utils\Coroutine;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-#[Process(
-    nums: 1,
-    name: 'ConsumerQueueProcess',
-    enableCoroutine: true,
-    redirectStdinStdout: false
-)]
+//#[Process(
+//    nums: 1,
+//    name: 'ConsumerQueueProcess',
+//    enableCoroutine: true,
+//    redirectStdinStdout: false
+//)]
 class ConsumerQueueProcess extends AbstractProcess
 {
     #[Inject]
@@ -49,11 +48,11 @@ class ConsumerQueueProcess extends AbstractProcess
                 if ($index > 300000) {
                     throw new ProcessException(500, '自定义进程异常抛出测试');
                 }
-                if ($index === 1) {
-                    for ($i = 500; $i--;) {
+                if ($index === -1) {
+                    $driver = DriverFactory::getDriverInstance('redis-queue');
+                    for ($i = 2000; $i--;) {
                         // 向异步队列中投递消息
-                        $driver = DriverFactory::getDriverInstance('redis-queue');
-                        $driver->push(new StopDemoJob((string)$i, [$i]));
+                        $driver->push(new ConsumerDemoJob((string)$i, [$i]));
                     }
                 }
             }
