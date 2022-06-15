@@ -1,18 +1,15 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 11:50
- * Author: JerryTian<tzfforyou@163.com>
- * File: CorsMiddleware.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Middleware;
-
 
 use Hyperf\Context\Context;
 use Psr\Http\Message\ResponseInterface;
@@ -22,16 +19,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * 跨域中间件设置
- * Class CorsMiddleware
- * @package App\Middleware
+ * Class CorsMiddleware.
  */
 class CorsMiddleware implements MiddlewareInterface
 {
     /**
-     * 跨域处理
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
+     * 跨域处理.
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

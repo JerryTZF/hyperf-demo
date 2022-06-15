@@ -1,21 +1,17 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/23 15:33
- * Author: JerryTian<tzfforyou@163.com>
- * File: StopDemoJob.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Job;
 
-use App\Lib\_Log\Log;
-use App\Lib\_Redis\Redis;
-use Hyperf\Utils\Coroutine;
+use App\Model\Good;
 
 // 自定义消费体
 class StopDemoJob extends AbstractJob
@@ -25,18 +21,8 @@ class StopDemoJob extends AbstractJob
         parent::__construct($uniqueId, $params);
     }
 
-    // 模拟队列消费时,中断消费进程
-    // 往队列投递较多的task即可
     public function handle()
     {
-        // 停止服务会有问题的场景
-        Coroutine::sleep(1);
-        (Redis::getRedisInstance())->incr('work_1');
-        Coroutine::sleep(1);
-        (Redis::getRedisInstance())->incr('work_2');
-        Log::stdout()->info("第 {$this->uniqueId} 号消息被消费成功!!!");
-
-        // 原子性消息
-
+        Good::query()->where(['g_name' => '德芙巧克力(200g)'])->increment('g_inventory');
     }
 }

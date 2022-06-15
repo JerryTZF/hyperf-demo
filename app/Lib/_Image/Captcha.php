@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/24 17:20
- * Author: JerryTian<tzfforyou@163.com>
- * File: Captcha.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Image;
 
 use Gregwar\Captcha\CaptchaBuilder;

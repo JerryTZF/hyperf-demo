@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 16:31
- * Author: JerryTian<tzfforyou@163.com>
- * File: ConsumerDemoJob.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Job;
 
 use App\Lib\_Log\Log;

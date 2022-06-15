@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/6/14 18:15
- * Author: JerryTian<tzfforyou@163.com>
- * File: TermSignalHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Signal;
 
 use Hyperf\Process\ProcessManager;
@@ -20,11 +18,10 @@ use Hyperf\Signal\SignalHandlerInterface;
 #[Signal]
 class TermSignalHandler implements SignalHandlerInterface
 {
-
     public function listen(): array
     {
         return [
-            [SignalHandlerInterface::PROCESS, SIGTERM]
+            [SignalHandlerInterface::PROCESS, SIGTERM],
         ];
     }
 

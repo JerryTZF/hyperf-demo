@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 13:47
- * Author: JerryTian<tzfforyou@163.com>
- * File: ValidationExceptionHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -32,10 +30,10 @@ class ValidationExceptionHandler extends ExceptionHandler
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(422)->withBody(new SwooleStream(json_encode([
-                'code'   => SystemCode::VALIDATOR_ERR,
-                'msg'    => SystemCode::getMessage(SystemCode::VALIDATOR_ERR) . $httpBody,
+                'code' => SystemCode::VALIDATOR_ERR,
+                'msg' => SystemCode::getMessage(SystemCode::VALIDATOR_ERR) . $httpBody,
                 'status' => false,
-                'data'   => []
+                'data' => [],
             ], JSON_UNESCAPED_UNICODE)));
     }
 

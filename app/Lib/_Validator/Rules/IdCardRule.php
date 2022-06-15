@@ -1,24 +1,22 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: IdCardRule.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/9/14
- * Time: 下午3:19
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Validator\Rules;
 
-
-use Hyperf\Validation\Validator;
 use App\Lib\_Tool\IdentityCard;
+use Hyperf\Validation\Validator;
 
 class IdCardRule implements RuleInterface
 {
-    const NAME = 'id_card';
+    public const NAME = 'id_card';
 
     public function passes($attribute, $value, $parameters, Validator $validator): bool
     {

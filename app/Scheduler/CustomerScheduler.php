@@ -1,15 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 14:57
- * Author: JerryTian<tzfforyou@163.com>
- * File: CustomerScheduler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Scheduler;
 
 use App\Exception\SchedulerException;
@@ -20,7 +19,7 @@ use Hyperf\Crontab\Annotation\Crontab;
     rule: '\/10 * * * * *',
     callback: 'execute',
     memo: '测试定时任务',
-    enable: "isEnable"
+    enable: 'isEnable'
 )]
 class CustomerScheduler
 {
@@ -31,7 +30,6 @@ class CustomerScheduler
         } catch (SchedulerException $e) {
             throw new SchedulerException(988, $e->getMessage());
         }
-
     }
 
     public function isEnable(): bool

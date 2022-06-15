@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace App\Lib\_Validator;
 
 use App\Lib\_Validator\Rules\CharactersRule;
@@ -17,11 +26,6 @@ abstract class AbstractValidator
     protected static array $extends = [];
 
     /**
-     * @param array $data
-     * @param array $rules
-     * @param array $messages
-     * @param bool $firstError
-     * @return bool
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -43,8 +47,7 @@ abstract class AbstractValidator
     }
 
     /**
-     * 获取验证器
-     * @return ValidatorFactoryInterface
+     * 获取验证器.
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -62,28 +65,30 @@ abstract class AbstractValidator
         return $validator;
     }
 
+    public static function messages(): array
+    {
+        return [];
+    }
+
     /**
-     * 初始化扩展
+     * 初始化扩展.
      */
     protected static function initExtends(): void
     {
         self::$extends = [
-            PhoneRule::NAME      => new PhoneRule(),
+            PhoneRule::NAME => new PhoneRule(),
             CharactersRule::NAME => new CharactersRule(),
-            IdCardRule::NAME     => new IdCardRule()
+            IdCardRule::NAME => new IdCardRule(),
         ];
     }
 
     /**
-     * 注册验证器扩展
-     * @param ValidatorFactoryInterface $validator
-     * @param array $extends
+     * 注册验证器扩展.
      */
     protected static function registerExtends(ValidatorFactoryInterface $validator, array $extends)
     {
         foreach ($extends as $key => $extend) {
             if ($extend instanceof RuleInterface) {
-
                 $validator->extend($key, function (...$args) use ($extend) {
                     return call_user_func_array([$extend, RuleInterface::PASSES_NAME], $args);
                 });
@@ -93,13 +98,5 @@ abstract class AbstractValidator
                 });
             }
         }
-    }
-
-    /**
-     * @return array
-     */
-    public static function messages(): array
-    {
-        return [];
     }
 }

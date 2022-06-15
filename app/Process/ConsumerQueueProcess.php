@@ -1,22 +1,19 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 14:24
- * Author: JerryTian<tzfforyou@163.com>
- * File: ConsumerQueueProcess.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Process;
 
 use App\Exception\ProcessException;
 use App\Hook\ConsumerProcessFailEvent;
 use App\Job\ConsumerDemoJob;
-use App\Job\StopDemoJob;
 use App\Lib\_RedisQueue\DriverFactory;
 use Exception;
 use Hyperf\Di\Annotation\Inject;
@@ -26,12 +23,12 @@ use Hyperf\Process\ProcessManager;
 use Hyperf\Utils\Coroutine;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-//#[Process(
+// #[Process(
 //    nums: 1,
 //    name: 'ConsumerQueueProcess',
 //    enableCoroutine: true,
 //    redirectStdinStdout: false
-//)]
+// )]
 class ConsumerQueueProcess extends AbstractProcess
 {
     #[Inject]
@@ -43,16 +40,16 @@ class ConsumerQueueProcess extends AbstractProcess
         $index = 0;
         try {
             while (ProcessManager::isRunning()) {
-                $index += 1;
+                ++$index;
                 Coroutine::sleep(1);
                 if ($index > 300000) {
                     throw new ProcessException(500, '自定义进程异常抛出测试');
                 }
                 if ($index === -1) {
                     $driver = DriverFactory::getDriverInstance('redis-queue');
-                    for ($i = 2000; $i--;) {
+                    for ($i = 2000; --$i;) {
                         // 向异步队列中投递消息
-                        $driver->push(new ConsumerDemoJob((string)$i, [$i]));
+                        $driver->push(new ConsumerDemoJob((string) $i, [$i]));
                     }
                 }
             }

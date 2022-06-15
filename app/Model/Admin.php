@@ -1,10 +1,17 @@
 <?php
 
-declare (strict_types=1);
-
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace App\Model;
 
-/**
+/*
  * CREATE TABLE `admin` (
  * `id` int NOT NULL AUTO_INCREMENT,
  * `account` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '账户',
@@ -28,40 +35,40 @@ use Hyperf\DbConnection\Model\Model;
  */
 class Admin extends Model
 {
-    const CREATED_AT = 'create_time';
+    public const CREATED_AT = 'create_time';
 
-    const UPDATED_AT = 'modify_time';
+    public const UPDATED_AT = 'modify_time';
 
     /**
-     * 表名称
+     * 表名称.
      * @var string
      */
     protected $table = 'admin';
 
     /**
-     * 允许被批量赋值的字段集合
+     * 允许被批量赋值的字段集合.
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * 数据格式化配置
+     * 数据格式化配置.
      * @var array
      */
     protected $casts = [
-        'id'          => 'integer',
+        'id' => 'integer',
         'create_time' => 'Y-m-d H:i:s',
-        'modify_time' => 'Y-m-d H:i:s'
+        'modify_time' => 'Y-m-d H:i:s',
     ];
 
     /**
-     * 时间格式
+     * 时间格式.
      * @var string
      */
     protected $dateFormat = 'Y-m-d H:i:s';
 
     /**
-     * 密码修改器
+     * 密码修改器.
      * @param $value
      */
     public function setPwdAttribute($value)

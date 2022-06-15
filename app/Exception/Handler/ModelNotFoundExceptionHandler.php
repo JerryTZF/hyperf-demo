@@ -1,15 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 13:50
- * Author: JerryTian<tzfforyou@163.com>
- * File: ModelNotFoundExceptionHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -21,7 +20,6 @@ use Throwable;
 
 class ModelNotFoundExceptionHandler extends ExceptionHandler
 {
-
     public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         // 禁止异常冒泡
@@ -29,10 +27,10 @@ class ModelNotFoundExceptionHandler extends ExceptionHandler
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(200)->withBody(new SwooleStream(json_encode([
-                'code'   => SystemCode::DATA_NOT_FOUND,
-                'msg'    => SystemCode::getMessage(SystemCode::DATA_NOT_FOUND),
+                'code' => SystemCode::DATA_NOT_FOUND,
+                'msg' => SystemCode::getMessage(SystemCode::DATA_NOT_FOUND),
                 'status' => false,
-                'data'   => []
+                'data' => [],
             ], JSON_UNESCAPED_UNICODE)));
     }
 

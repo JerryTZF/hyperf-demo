@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 15:31
- * Author: JerryTian<tzfforyou@163.com>
- * File: ConsumerProcessFailListener.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Listener;
 
 use App\Hook\ConsumerProcessFailEvent;
@@ -27,7 +25,7 @@ class ConsumerProcessFailListener implements ListenerInterface
     {
         return [
             ConsumerProcessFailEvent::class, // 自定义异常捕获后触发该事件
-            AfterProcessHandle::class // 系统事件(进程退出时触发)
+            AfterProcessHandle::class, // 系统事件(进程退出时触发)
         ];
     }
 

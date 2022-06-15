@@ -1,66 +1,60 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: IdentityCard.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/9/14
- * Time: 下午3:17
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Tool;
 
 /**
  * 身份证是否合法
- * Class IdentityCard
- * @package App\Lib\_Tool
+ * Class IdentityCard.
  */
 class IdentityCard
 {
     public static function isValid(string $num): bool
     {
-        //老身份证长度15位，新身份证长度18位
+        // 老身份证长度15位，新身份证长度18位
         $length = strlen($num);
-        if ($length == 15) { //如果是15位身份证
-
-            //15位身份证没有字母
-            if (!is_numeric($num)) {
+        if ($length == 15) { // 如果是15位身份证
+            // 15位身份证没有字母
+            if (! is_numeric($num)) {
                 return false;
             }
             // 省市县（6位）
             $areaNum = substr($num, 0, 6);
             // 出生年月（6位）
             $dateNum = substr($num, 6, 6);
-
-        } else if ($length == 18) { //如果是18位身份证
-
-            //基本格式校验
-            if (!preg_match('/^\d{17}[0-9xX]$/', $num)) {
+        } elseif ($length == 18) { // 如果是18位身份证
+            // 基本格式校验
+            if (! preg_match('/^\d{17}[0-9xX]$/', $num)) {
                 return false;
             }
             // 省市县（6位）
             $areaNum = substr($num, 0, 6);
             // 出生年月日（8位）
             $dateNum = substr($num, 6, 8);
-
-        } else { //假身份证
+        } else { // 假身份证
             return false;
         }
 
-        //验证地区
-        if (!self::isAreaCodeValid($areaNum)) {
+        // 验证地区
+        if (! self::isAreaCodeValid($areaNum)) {
             return false;
         }
 
-        //验证日期
-        if (!self::isDateValid($dateNum)) {
+        // 验证日期
+        if (! self::isDateValid($dateNum)) {
             return false;
         }
 
-        //验证最后一位
-        if (!self::isVerifyCodeValid($num)) {
+        // 验证最后一位
+        if (! self::isVerifyCodeValid($num)) {
             return false;
         }
 
@@ -74,26 +68,25 @@ class IdentityCard
         // 根据GB/T2260—999，省市代码11到65
         if (11 <= $provinceCode && $provinceCode <= 65) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private static function isDateValid(string $date): bool
     {
-        if (strlen($date) == 6) { //15位身份证号没有年份，这里拼上年份
+        if (strlen($date) == 6) { // 15位身份证号没有年份，这里拼上年份
             $date = '19' . $date;
         }
         $year = intval(substr($date, 0, 4));
         $month = intval(substr($date, 4, 2));
         $day = intval(substr($date, 6, 2));
 
-        //日期基本格式校验
-        if (!checkdate($month, $day, $year)) {
+        // 日期基本格式校验
+        if (! checkdate($month, $day, $year)) {
             return false;
         }
 
-        //日期格式正确，但是逻辑存在问题(如:年份大于当前年)
+        // 日期格式正确，但是逻辑存在问题(如:年份大于当前年)
         $currYear = date('Y');
         if ($year > $currYear) {
             return false;
@@ -108,7 +101,7 @@ class IdentityCard
             $tokens = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
 
             $checkSum = 0;
-            for ($i = 0; $i < 17; $i++) {
+            for ($i = 0; $i < 17; ++$i) {
                 $checkSum += intval($num[$i]) * $factor[$i];
             }
 

@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/4/14 14:17
- * Author: JerryTian<tzfforyou@163.com>
- * File: WebSocketController.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Controller;
 
 use App\Lib\_Log\Log;
@@ -21,10 +19,8 @@ use Hyperf\Utils\Arr;
 use Swoole\Http\Request;
 use Swoole\Websocket\Frame;
 
-
 class WebSocketController implements OnMessageInterface, OnOpenInterface, OnCloseInterface
 {
-
     public function onClose($server, int $fd, int $reactorId): void
     {
         Log::stdout()->warning("fd:{$fd};reactorId:{$reactorId} 已经关闭");

@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/4/12 23:02
- * Author: JerryTian<tzfforyou@163.com>
- * File: ExportCsvHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Office;
 
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -22,8 +20,7 @@ class ExportCsvHandler
     private string $fileData = '';
 
     /**
-     * 设置表头
-     * @param array $headers
+     * 设置表头.
      * @return $this
      * @example ['汽车品牌', '型号', '颜色', '价格', '经销商']
      */
@@ -34,9 +31,8 @@ class ExportCsvHandler
     }
 
     /**
-     * 添加数据
-     * @param array $data
-     * @return ExportCsvHandler|bool
+     * 添加数据.
+     * @return bool|ExportCsvHandler
      * @example [['brand'=>'宝马','format'=>'X5','color'=>'BLACK','price'=>'54.12W','address'=>'深圳宝马4S店'],[],[]]
      */
     public function setData(array $data): static|bool
@@ -53,15 +49,14 @@ class ExportCsvHandler
     }
 
     /**
-     * 保存CSV到本地
-     * @param string $filename
+     * 保存CSV到本地.
      * @return string[]
      */
     public function saveToLocal(string $filename): array
     {
         $filename = $filename . '.csv';
         $dir = BASE_PATH . '/runtime/storage/';
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
         $outFileName = $dir . $filename;
@@ -86,9 +81,7 @@ class ExportCsvHandler
     }
 
     /**
-     * utf-8 -> gbk
-     * @param string $data
-     * @return array|bool|string|null
+     * utf-8 -> gbk.
      */
     public static function UTF2GBK(string $data): array|bool|string|null
     {

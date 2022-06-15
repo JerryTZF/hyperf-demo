@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/4/12 15:23
- * Author: JerryTian<tzfforyou@163.com>
- * File: ExportExcelHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Office;
 
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -37,11 +35,11 @@ class ExportExcelHandler
         $this->spreadsheet->getProperties()
             ->setCreator('Jerry')
             ->setLastModifiedBy('Jerry')
-            ->setTitle("Office 2007 XLSX Test Document")
-            ->setSubject("Office 2007 XLSX Test Document")
-            ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
-            ->setKeywords("office 2007 openxml php")
-            ->setCategory("Excel");
+            ->setTitle('Office 2007 XLSX Test Document')
+            ->setSubject('Office 2007 XLSX Test Document')
+            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+            ->setKeywords('office 2007 openxml php')
+            ->setCategory('Excel');
         // Sets the active sheet index to the first sheet
         $this->spreadsheet->setActiveSheetIndex(0);
         // Active sheet
@@ -51,8 +49,7 @@ class ExportExcelHandler
     }
 
     /**
-     * 设置表头
-     * @param array $title
+     * 设置表头.
      * @return $this
      * @example ['汽车品牌', '型号', '颜色', '价格', '经销商']
      */
@@ -66,8 +63,7 @@ class ExportExcelHandler
     }
 
     /**
-     * 添加数据
-     * @param array $data
+     * 添加数据.
      * @return $this
      * @example [['宝马','X5','BLACK','54.12W','深圳宝马4S店'],[],[]]
      */
@@ -78,17 +74,15 @@ class ExportExcelHandler
             foreach ($datum as $value) {
                 // write col
                 $this->sheet->setCellValue($col . $this->row, $value);
-                $col++;
+                ++$col;
             }
-            $this->row++;
+            ++$this->row;
         }
         return $this;
     }
 
     /**
-     * 保存到本地
-     * @param string $filename
-     * @return array
+     * 保存到本地.
      */
     public function saveToLocal(string $filename): array
     {
@@ -96,7 +90,7 @@ class ExportExcelHandler
 
         $filename = $filename . '.xlsx';
         $dir = BASE_PATH . '/runtime/storage/';
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
         $outFileName = $dir . $filename;
@@ -110,9 +104,7 @@ class ExportExcelHandler
     }
 
     /**
-     * 输出到浏览器
-     * @param string $filename
-     * @return ResponseInterface
+     * 输出到浏览器.
      * @throws Exception
      */
     public function saveToBrowser(string $filename): ResponseInterface
@@ -131,6 +123,6 @@ class ExportExcelHandler
             ->withHeader('content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             ->withHeader('content-disposition', "attachment; filename={$filename}")
             ->withHeader('content-transfer-encoding', 'binary')
-            ->withBody(new SwooleStream((string)$content));
+            ->withBody(new SwooleStream((string) $content));
     }
 }

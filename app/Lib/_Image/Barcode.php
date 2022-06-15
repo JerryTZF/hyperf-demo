@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/24 17:30
- * Author: JerryTian<tzfforyou@163.com>
- * File: Barcode.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Image;
 
 use Picqer\Barcode\BarcodeGenerator;
@@ -19,12 +17,16 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 class Barcode
 {
     protected BarcodeGenerator $_generator;
+
     // 条码类型(类中定义的常量)
     protected mixed $_type;
+
     // 条码宽度(单根竖条宽度)
     protected int $_width;
+
     // 条码高度
     protected int $_height;
+
     // rgb
     protected array $_rgb;
 
@@ -39,7 +41,7 @@ class Barcode
         isset($config['rgb']) ? $this->_rgb = $config['rgb'] : $this->_rgb = [0, 0, 0];
         isset($config['path']) ? $this->path = $config['path'] : $this->path = BASE_PATH . '/runtime/barcode/';
 
-        if (!is_dir($this->path)) {
+        if (! is_dir($this->path)) {
             mkdir(iconv('GBK', 'UTF-8', $this->path), 0755);
         }
     }

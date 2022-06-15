@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -33,10 +32,10 @@ class AppExceptionHandler extends ExceptionHandler
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(500)
             ->withBody(new SwooleStream(json_encode([
-                'code'   => SystemCode::SYSTEM_ERROR,
-                'msg'    => SystemCode::getMessage(SystemCode::SYSTEM_ERROR),
+                'code' => SystemCode::SYSTEM_ERROR,
+                'msg' => SystemCode::getMessage(SystemCode::SYSTEM_ERROR),
                 'status' => false,
-                'data'   => []
+                'data' => [],
             ], JSON_UNESCAPED_UNICODE)));
     }
 

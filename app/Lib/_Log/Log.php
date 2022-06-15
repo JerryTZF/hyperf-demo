@@ -1,17 +1,15 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: Log.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/6/30
- * Time: 下午2:42
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Log;
-
 
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -19,16 +17,12 @@ use Hyperf\Utils\ApplicationContext;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Log
- * @package App\Lib\_Log
- * Log相关工具
+ * Class Log.
  */
 class Log
 {
     /**
-     * 获取Logger实例
-     * @param string $channel
-     * @return LoggerInterface
+     * 获取Logger实例.
      */
     public static function get(string $channel = ''): LoggerInterface
     {
@@ -36,8 +30,7 @@ class Log
     }
 
     /**
-     * CLI 日志实例
-     * @return StdoutLoggerInterface
+     * CLI 日志实例.
      */
     public static function stdout(): StdoutLoggerInterface
     {

@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace App\Lib\_Alipay;
 
 use Alipay\EasySDK\Base\Image\Client as imageClient;
@@ -24,22 +33,29 @@ use Alipay\EasySDK\Util\AES\Client as aesClient;
 use Alipay\EasySDK\Util\Generic\Client as genericClient;
 
 /**
- * AlipaySDK 封装
+ * AlipaySDK 封装.
  */
 final class AlipaySDK
 {
     public array $config = [];
+
     public EasySDKKernel $kernel;
-    protected Base $base;
-    protected Marketing $marketing;
-    protected Member $member;
-    protected Payment $payment;
-    protected Security $security;
-    protected Util $util;
+
+    private Base $base;
+
+    private Marketing $marketing;
+
+    private Member $member;
+
+    private Payment $payment;
+
+    private Security $security;
+
+    private Util $util;
 
     private function __construct(Config $config)
     {
-        if (!empty($config->alipayCertPath)) {
+        if (! empty($config->alipayCertPath)) {
             $certEnvironment = new CertEnvironment();
             $certEnvironment->certEnvironment(
                 $config->merchantCertPath,
@@ -61,10 +77,7 @@ final class AlipaySDK
     }
 
     /**
-     * 使用原始配置初始化 AlipaySDK
-     *
-     * @param Config $config
-     * @return AlipaySDK
+     * 使用原始配置初始化 AlipaySDK.
      */
     public static function setOptions(Config $config): AlipaySDK
     {
@@ -101,7 +114,6 @@ final class AlipaySDK
         return $this->util;
     }
 }
-
 
 class Base
 {
@@ -247,4 +259,3 @@ class Util
         return new aesClient($this->kernel);
     }
 }
-

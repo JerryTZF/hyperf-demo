@@ -1,15 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: Result.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/6/30
- * Time: 下午2:10
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Result;
 
 use Hyperf\Context\Context;
@@ -18,11 +17,11 @@ use Hyperf\Context\Context;
 class Result
 {
     // 标准结果集
-    const RESULT = [
-        'code'   => 200,
-        'msg'    => 'ok',
+    public const RESULT = [
+        'code' => 200,
+        'msg' => 'ok',
         'status' => true,
-        'data'   => []
+        'data' => [],
     ];
 
     // 上下文key

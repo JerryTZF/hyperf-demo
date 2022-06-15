@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 17:42
- * Author: JerryTian<tzfforyou@163.com>
- * File: ErrorDemoJob.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Job;
 
 // 模拟消费失败的任务
@@ -33,6 +31,6 @@ class ErrorDemoJob extends AbstractJob
     {
         Coroutine::sleep(1);
         Log::stdout()->warning(Carbon::now()->toTimeString());
-        throw new AsyncQueueException(2131,"任务ID={$this->uniqueId} 消费失败");
+        throw new AsyncQueueException(2131, "任务ID={$this->uniqueId} 消费失败");
     }
 }

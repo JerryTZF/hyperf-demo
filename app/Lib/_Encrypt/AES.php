@@ -1,17 +1,15 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: AES.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/6/30
- * Time: 下午5:08
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Encrypt;
-
 
 class AES
 {
@@ -22,9 +20,8 @@ class AES
     private static string $method = 'AES-128-ECB';
 
     /**
-     * 加密(编码为Hex)
+     * 加密(编码为Hex).
      * @param $data
-     * @return string
      */
     public static function aesEn($data): string
     {
@@ -32,9 +29,8 @@ class AES
     }
 
     /**
-     * 解密(编码为Hex)
+     * 解密(编码为Hex).
      * @param $data
-     * @return string
      */
     public static function aesDe($data): string
     {
@@ -42,9 +38,8 @@ class AES
     }
 
     /**
-     * 加密(编码为Base64)
+     * 加密(编码为Base64).
      * @param $data
-     * @return string
      */
     public static function aesEnBase64($data): string
     {
@@ -52,13 +47,11 @@ class AES
     }
 
     /**
-     * 解密(编码为Base64)
+     * 解密(编码为Base64).
      * @param $data
-     * @return string
      */
     public static function aesDeBase64($data): string
     {
         return openssl_decrypt(base64_decode($data), self::$method, self::$key, OPENSSL_RAW_DATA, self::$iv);
     }
-
 }

@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/24 17:25
- * Author: JerryTian<tzfforyou@163.com>
- * File: Qrcode.php
- * Desc: https://packagist.org/packages/endroid/qr-code
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Image;
 
 use Endroid\QrCode\Builder\Builder;
@@ -43,7 +41,7 @@ class Qrcode
         isset($config['labelText']) ? $this->labelText = $config['labelText'] : $this->labelText = '';
         isset($config['path']) ? $this->path = $config['path'] : $this->path = BASE_PATH . '/runtime/qrcode/';
 
-        if (!is_dir($this->path)) {
+        if (! is_dir($this->path)) {
             mkdir(iconv('GBK', 'UTF-8', $this->path), 0755);
         }
 
@@ -69,7 +67,6 @@ class Qrcode
     {
         return $this->builder->data($content)->build()->getString();
     }
-
 
     // 二维码保存到本地
     public function move(string $filename, string $content)

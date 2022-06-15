@@ -1,29 +1,25 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Name: Redis.php
- * User: JerryTian<tzfforyou@163.com>
- * Date: 2021/6/30
- * Time: 下午3:58
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Lib\_Redis;
 
 use Hyperf\Utils\ApplicationContext;
 
 /**
- * Class Redis
- * @package App\Lib\_Redis
- * Redis 工具类
+ * Class Redis.
  */
 class Redis
 {
     /**
-     * 获取Redis实例
-     * @return \Hyperf\Redis\Redis
+     * 获取Redis实例.
      */
     public static function getRedisInstance(): \Hyperf\Redis\Redis
     {

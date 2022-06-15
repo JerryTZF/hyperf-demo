@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/4/11 17:40
- * Author: JerryTian<tzfforyou@163.com>
- * File: FileLock.php
- * Desc: 文件锁(非集群模式使用)
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Lock;
 
 use Hyperf\Utils\Coroutine;
@@ -23,8 +21,7 @@ class FileLock
         $fp = fopen($file, 'a+');
         $time = 0;
         while (true) {
-            if (flock($fp,LOCK_EX)){
-
+            if (flock($fp, LOCK_EX)) {
                 // TODO 这里不对,应该使用AOP切面,切入要锁住的上下文才可以 :(
                 flock($fp, LOCK_UN);
                 fclose($fp);

@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/25 11:35
- * Author: JerryTian<tzfforyou@163.com>
- * File: DemoService.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Service;
 
 use App\Lib\_Cache\Cache;
@@ -25,7 +23,7 @@ class DemoService
     protected Result $result;
 
     // 这里生成缓存的KEY是: "c:admin:Jerry_12345678"
-    #[Cacheable(prefix: "admin", ttl: 300, value: "#{account}_#{uuid}", listener: "UPDATE-ADMIN-INFO")]
+    #[Cacheable(prefix: 'admin', ttl: 300, value: '#{account}_#{uuid}', listener: 'UPDATE-ADMIN-INFO')]
     public function getAdminInfo(string $account, string $uuid = '12345678'): array
     {
         $adminInfo = Admin::query()->where(['account' => $account])->firstOrFail();
@@ -42,7 +40,7 @@ class DemoService
         // 刷新缓存
         (new Cache())->flush('UPDATE-ADMIN-INFO', [
             'account' => $account,
-            'uuid'    => '12345678'
+            'uuid' => '12345678',
         ]);
 
         return $this->result->getResult();

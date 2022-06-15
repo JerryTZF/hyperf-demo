@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/4/3 18:39
- * Author: JerryTian<tzfforyou@163.com>
- * File: LimitQueueProcess.php
- * Desc: 并行消费为1的队列(防止超卖、原子执行)
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Process;
 
 use Hyperf\AsyncQueue\Process\ConsumerProcess;

@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/25 11:24
- * Author: JerryTian<tzfforyou@163.com>
- * File: Cache.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Lib\_Cache;
 
 use Hyperf\Cache\Listener\DeleteListenerEvent;
@@ -24,15 +22,15 @@ class Cache
     #[Inject]
     protected EventDispatcherInterface $dispatcher;
 
-    public static function getInstance(): CacheInterface
-    {
-        return ApplicationContext::getContainer()->get(CacheInterface::class);
-    }
-
     // 静态调用
     public static function __callStatic($action, $args)
     {
-        return self::getInstance()->$action(...$args);
+        return self::getInstance()->{$action}(...$args);
+    }
+
+    public static function getInstance(): CacheInterface
+    {
+        return ApplicationContext::getContainer()->get(CacheInterface::class);
     }
 
     // 清除缓存

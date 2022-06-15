@@ -1,16 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/3/22 13:55
- * Author: JerryTian<tzfforyou@163.com>
- * File: RateLimitExceptionHandler.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -29,10 +27,10 @@ class RateLimitExceptionHandler extends ExceptionHandler
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(200)->withBody(new SwooleStream(json_encode([
-                'code'   => SystemCode::RATE_LIMIT_ERR,
-                'msg'    => SystemCode::getMessage(SystemCode::RATE_LIMIT_ERR),
+                'code' => SystemCode::RATE_LIMIT_ERR,
+                'msg' => SystemCode::getMessage(SystemCode::RATE_LIMIT_ERR),
                 'status' => false,
-                'data'   => []
+                'data' => [],
             ], JSON_UNESCAPED_UNICODE)));
     }
 
