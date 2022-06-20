@@ -1,43 +1,38 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * Created by PhpStorm
- * Time: 2022/6/16 11:13
- * Author: JerryTian<tzfforyou@163.com>
- * File: BootAppListener.php
- * Desc:
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
-
 namespace App\Listener;
 
 use App\Lib\_Log\Log;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BeforeServerStart;
-use Hyperf\Framework\Event\BeforeWorkerStart;
 use Hyperf\Framework\Event\BootApplication;
-use Hyperf\Utils\ApplicationContext;
 use Swoole\Table;
 
 #[Listener]
 class BootAppListener implements ListenerInterface
 {
-
     public function listen(): array
     {
         return [
             BootApplication::class,
-            BeforeServerStart::class
+            BeforeServerStart::class,
         ];
     }
 
     public function process(object $event)
     {
         if ($event instanceof BootApplication) {
-            $logo = <<<EFO
+            $logo = <<<'EFO'
 
     __        __                                       
    / /_  ____/ /_  __   ________  ______   _____  _____

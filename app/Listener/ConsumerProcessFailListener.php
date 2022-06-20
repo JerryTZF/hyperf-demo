@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 namespace App\Listener;
 
 use App\Hook\ConsumerProcessFailEvent;
@@ -38,19 +37,19 @@ class ConsumerProcessFailListener implements ListenerInterface
             case $event instanceof ConsumerProcessFailEvent:
                 [$msg, $level] = [
                     sprintf('[自定义进程异常监听器][进程:%s][错误:%s]', $event->name, $event->throwable->getMessage()),
-                    'error'
+                    'error',
                 ];
                 break;
             case $event instanceof AfterProcessHandle:
                 [$msg, $level] = [
                     sprintf('[自定义进程停止][进程:%s][第 %s 个进程]', $event->process->name, $event->index),
-                    'warning'
+                    'warning',
                 ];
                 break;
             case $event instanceof BeforeProcessHandle:
                 [$msg, $level] = [
                     sprintf('[自定义进程启动][进程:%s][第 %s 个进程]', $event->process->name, $event->index),
-                    'info'
+                    'info',
                 ];
                 break;
             default:
