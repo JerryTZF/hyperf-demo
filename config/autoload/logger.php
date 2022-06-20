@@ -14,36 +14,36 @@ return [
         'handlers' => [
             // 记录INFO级别及以上等级日志
             [
-                'class'       => Monolog\Handler\RotatingFileHandler::class,
+                'class' => Monolog\Handler\RotatingFileHandler::class,
                 'constructor' => [
                     'filename' => BASE_PATH . '/runtime/logs/info.log',
-                    'level'    => Monolog\Logger::INFO
+                    'level' => Monolog\Logger::INFO,
                 ],
-                'formatter'   => [
-                    'class'       => Monolog\Formatter\LineFormatter::class,
+                'formatter' => [
+                    'class' => Monolog\Formatter\LineFormatter::class,
                     'constructor' => [
-                        'format'                => "[%datetime%]|[%channel%]|[%level_name%]|[%message%]|[%context%]\n",
-                        'dateFormat'            => 'Y-m-d H:i:s',
+                        'format' => "[%datetime%]|[%channel%]|[%level_name%]|[%message%]|[%context%]\n",
+                        'dateFormat' => 'Y-m-d H:i:s',
                         'allowInlineLineBreaks' => true,
-                    ]
-                ]
+                    ],
+                ],
             ],
             // 记录ERROR及以上日志
             [
-                'class'       => Monolog\Handler\RotatingFileHandler::class,
+                'class' => Monolog\Handler\RotatingFileHandler::class,
                 'constructor' => [
                     'filename' => BASE_PATH . '/runtime/logs/error.log',
-                    'level'    => Monolog\Logger::ERROR
+                    'level' => Monolog\Logger::ERROR,
                 ],
-                'formatter'   => [
-                    'class'       => Monolog\Formatter\LineFormatter::class,
+                'formatter' => [
+                    'class' => Monolog\Formatter\LineFormatter::class,
                     'constructor' => [
-                        'format'                => "[%datetime%]|[%channel%]|[%level_name%]|[%message%]|[%context%]\n",
-                        'dateFormat'            => 'Y-m-d H:i:s',
+                        'format' => "[%datetime%]|[%channel%]|[%level_name%]|[%message%]|[%context%]\n",
+                        'dateFormat' => 'Y-m-d H:i:s',
                         'allowInlineLineBreaks' => true,
-                    ]
-                ]
+                    ],
+                ],
             ],
-        ]
+        ],
     ],
 ];

@@ -10,5 +10,5 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    Hyperf\HttpServer\CoreMiddleware::class => App\Middleware\CoreMiddleware::class
+    Hyperf\HttpServer\CoreMiddleware::class => App\Middleware\CoreMiddleware::class,
 ];

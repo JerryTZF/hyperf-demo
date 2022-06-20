@@ -332,9 +332,9 @@ class DemoController extends AbstractController
     public function asyncDemo(): array
     {
         $driver = DriverFactory::getDriverInstance('redis-queue');
-        for ($i = 10; --$i;) {
+        for ($i = 0; $i < 10; ++$i) {
             go(function () use ($driver, $i) {
-                for ($j = 200; --$j;) {
+                for ($j = 0; $j < 200; ++$j) {
                     $driver->push(new StopDemoJob("group:{$i};index:{$j};", []));
                 }
             });
