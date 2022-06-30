@@ -15,7 +15,7 @@ use Hyperf\AsyncQueue\Process\ConsumerProcess;
 use Hyperf\Process\Annotation\Process;
 
 #[Process(
-    nums: 5,
+    nums: 1,
     name: 'AsyncQueueProcess',
     enableCoroutine: true,
     redirectStdinStdout: false

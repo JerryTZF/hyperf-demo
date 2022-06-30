@@ -9,15 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-/**
- * Created by PhpStorm
- * Time: 2022/4/7 10:16
- * Author: JerryTian<tzfforyou@163.com>
- * File: SaleRecords.php
- * Desc:.
- */
-
 namespace App\Model;
+
+use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
@@ -25,11 +19,16 @@ namespace App\Model;
  * @property string $order_no
  * @property string $buyer
  * @property float $amount
+ * @property string $is_paid
+ * @property string $is_timeout
+ * @property string $deleted_at
  * @property string $create_time
  * @property string $modify_time
  */
 class SaleRecords extends Model
 {
+    use SoftDeletes;
+
     public const CREATED_AT = 'create_time';
 
     public const UPDATED_AT = 'modify_time';

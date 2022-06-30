@@ -12,6 +12,8 @@ declare(strict_types=1);
 return [
     'handler' => [
         'http' => [
+            // 业务逻辑异常
+            App\Exception\Handler\BusinessExceptionHandler::class,
             // 验证器类型错误处理
             App\Exception\Handler\ValidationExceptionHandler::class,
             // 数据库未找到数据异常处理

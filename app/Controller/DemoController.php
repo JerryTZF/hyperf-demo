@@ -341,4 +341,12 @@ class DemoController extends AbstractController
         }
         return $this->result->getResult();
     }
+
+    #[GetMapping(path: 'test')]
+    public function test(): array
+    {
+        $deletedRows = SaleRecords::query()->where(['buyer' => '1655208458'])->delete();
+
+        return $this->result->setData(['deleted_rows' => $deletedRows])->getResult();
+    }
 }
