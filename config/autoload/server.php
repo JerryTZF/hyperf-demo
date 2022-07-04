@@ -38,6 +38,21 @@ return [
                 Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
             ],
         ],
+        [
+            'name' => 'jsonrpc',
+            'type' => ServerInterface::SERVER_BASE,
+            'host' => '0.0.0.0',
+            'port' => 9503,
+            'sock_type' => SWOOLE_SOCK_TCP,
+            'callbacks' => [
+                Event::ON_RECEIVE => [Hyperf\JsonRpc\TcpServer::class, 'onReceive'],
+            ],
+            'setting' => [
+                Constant::OPTION_OPEN_EOF_SPLIT => true,
+                Constant::OPTION_PACKAGE_EOF => '\r\n',
+                Constant::OPTION_PACKAGE_MAX_LENGTH => 1024 * 1024 * 2,
+            ],
+        ],
     ],
     'settings' => [
         Constant::OPTION_ENABLE_COROUTINE => true,
