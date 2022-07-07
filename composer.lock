@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb15b6a84f101af713054d31b50247ae",
+    "content-hash": "74315887ca37dbcf983ca0375ba4b629",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -2621,16 +2621,16 @@
         },
         {
             "name": "hyperf/flysystem-oss",
-            "version": "v1.0.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hyperf/flysystem-oss.git",
-                "reference": "ebf396f29b3aa039ca1cebbc8518fcccaee554f9"
+                "reference": "ae5c3a18be96d1d9aab1ec36b3807e15ae8db614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/flysystem-oss/zipball/ebf396f29b3aa039ca1cebbc8518fcccaee554f9",
-                "reference": "ebf396f29b3aa039ca1cebbc8518fcccaee554f9",
+                "url": "https://api.github.com/repos/hyperf/flysystem-oss/zipball/ae5c3a18be96d1d9aab1ec36b3807e15ae8db614",
+                "reference": "ae5c3a18be96d1d9aab1ec36b3807e15ae8db614",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2641,8 +2641,8 @@
             },
             "require": {
                 "aliyuncs/oss-sdk-php": "^2.4",
-                "hyperf/utils": "^2.2",
-                "league/flysystem": "^2.1",
+                "hyperf/utils": "^2.2|^3.0",
+                "league/flysystem": "^2.1|^3.0",
                 "php": ">=7.3"
             },
             "require-dev": {
@@ -2676,9 +2676,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hyperf/flysystem-oss/issues",
-                "source": "https://github.com/hyperf/flysystem-oss/tree/v1.0.0"
+                "source": "https://github.com/hyperf/flysystem-oss/tree/v1.2.0"
             },
-            "time": "2021-07-06T15:19:27+00:00"
+            "time": "2022-07-06T06:25:55+00:00"
         },
         {
             "name": "hyperf/framework",
@@ -2932,134 +2932,6 @@
                 "http",
                 "http-server",
                 "hyperf",
-                "php",
-                "swoole"
-            ],
-            "support": {
-                "docs": "https://hyperf.wiki",
-                "issues": "https://github.com/hyperf/hyperf/issues",
-                "pull-request": "https://github.com/hyperf/hyperf/pulls",
-                "source": "https://github.com/hyperf/hyperf"
-            },
-            "time": "2022-05-24T13:10:54+00:00"
-        },
-        {
-            "name": "hyperf/json-rpc",
-            "version": "v2.2.33",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hyperf/json-rpc.git",
-                "reference": "bcd5b395edb4a4d237fbfbc08cb187cbea8088b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/json-rpc/zipball/bcd5b395edb4a4d237fbfbc08cb187cbea8088b5",
-                "reference": "bcd5b395edb4a4d237fbfbc08cb187cbea8088b5",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "hyperf/contract": "~2.2.0",
-                "hyperf/http-message": "~2.2.0",
-                "hyperf/load-balancer": "~2.2.0",
-                "hyperf/rpc": "~2.2.0",
-                "hyperf/utils": "~2.2.0",
-                "php": ">=7.2",
-                "psr/container": "^1.0|^2.0"
-            },
-            "suggest": {
-                "hyperf/event": "Register the objects to ProtocolManager automatically.",
-                "hyperf/framework": "Register the objects to ProtocolManager automatically.",
-                "hyperf/guzzle": "Required to use JSON RPC with HTTP protocol.",
-                "hyperf/rpc-client": "Reqiured to use JSON RPC in hyperf rpc client.",
-                "hyperf/rpc-server": "Reqiured to use JSON RPC in hyperf rpc server."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                },
-                "hyperf": {
-                    "config": "Hyperf\\JsonRpc\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hyperf\\JsonRpc\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A JSON RPC component for Hyperf RPC Server or Client.",
-            "homepage": "https://hyperf.io",
-            "keywords": [
-                "hyperf",
-                "json-rpc",
-                "php",
-                "swoole"
-            ],
-            "support": {
-                "docs": "https://hyperf.wiki",
-                "issues": "https://github.com/hyperf/hyperf/issues",
-                "pull-request": "https://github.com/hyperf/hyperf/pulls",
-                "source": "https://github.com/hyperf/hyperf"
-            },
-            "time": "2022-05-24T13:10:54+00:00"
-        },
-        {
-            "name": "hyperf/load-balancer",
-            "version": "v2.2.33",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hyperf/load-balancer.git",
-                "reference": "aa7dfcf274db9905aaf8a54bd88067b1e9170c28"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/load-balancer/zipball/aa7dfcf274db9905aaf8a54bd88067b1e9170c28",
-                "reference": "aa7dfcf274db9905aaf8a54bd88067b1e9170c28",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "markrogoyski/math-php": "^2.0",
-                "php": ">=7.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                },
-                "hyperf": {
-                    "config": "Hyperf\\LoadBalancer\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hyperf\\LoadBalancer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A load balancer library for Hyperf.",
-            "homepage": "https://hyperf.io",
-            "keywords": [
-                "hyperf",
-                "load-balancer",
                 "php",
                 "swoole"
             ],
@@ -3558,63 +3430,6 @@
                 "php",
                 "pool",
                 "redis"
-            ],
-            "support": {
-                "docs": "https://hyperf.wiki",
-                "issues": "https://github.com/hyperf/hyperf/issues",
-                "pull-request": "https://github.com/hyperf/hyperf/pulls",
-                "source": "https://github.com/hyperf/hyperf"
-            },
-            "time": "2022-05-24T13:10:54+00:00"
-        },
-        {
-            "name": "hyperf/rpc",
-            "version": "v2.2.33",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hyperf/rpc.git",
-                "reference": "5d8dafe3d1787fc9af8a57b788e57d70bad1472f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hyperf/rpc/zipball/5d8dafe3d1787fc9af8a57b788e57d70bad1472f",
-                "reference": "5d8dafe3d1787fc9af8a57b788e57d70bad1472f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "hyperf/contract": "~2.2.0",
-                "hyperf/utils": "~2.2.0",
-                "php": ">=7.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                },
-                "hyperf": []
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hyperf\\Rpc\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A rpc basic library for Hyperf.",
-            "homepage": "https://hyperf.io",
-            "keywords": [
-                "hyperf",
-                "php",
-                "rpc",
-                "swoole"
             ],
             "support": {
                 "docs": "https://hyperf.wiki",
@@ -4722,87 +4537,6 @@
             "time": "2021-07-01T19:01:15+00:00"
         },
         {
-            "name": "markrogoyski/math-php",
-            "version": "v2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/markrogoyski/math-php.git",
-                "reference": "85d7d7fe205a6df2b20f956720e25341f3b1462a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/markrogoyski/math-php/zipball/85d7d7fe205a6df2b20f956720e25341f3b1462a",
-                "reference": "85d7d7fe205a6df2b20f956720e25341f3b1462a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.2.0"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.0",
-                "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phploc/phploc": "*",
-                "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "*",
-                "phpunit/phpunit": "^8.5",
-                "squizlabs/php_codesniffer": "3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MathPHP\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Rogoyski",
-                    "email": "mark@rogoyski.com",
-                    "homepage": "https://github.com/markrogoyski",
-                    "role": "Lead developer"
-                },
-                {
-                    "name": "Kevin Nowaczyk",
-                    "homepage": "https://github.com/Beakerboy",
-                    "role": "Developer"
-                },
-                {
-                    "name": "MathPHP Community of Contributors",
-                    "homepage": "https://github.com/markrogoyski/math-php/graphs/contributors"
-                }
-            ],
-            "description": "Math Library for PHP. Features descriptive statistics and regressions; Continuous and discrete probability distributions; Linear algebra with matrices and vectors, Numerical analysis; special mathematical functions; Algebra",
-            "homepage": "https://github.com/markrogoyski/math-php/",
-            "keywords": [
-                "algebra",
-                "combinatorics",
-                "distributions",
-                "linear algebra",
-                "math",
-                "mathematics",
-                "matrix",
-                "numerical analysis",
-                "probability",
-                "regressions",
-                "statistics"
-            ],
-            "support": {
-                "issues": "https://github.com/markrogoyski/math-php/issues",
-                "source": "https://github.com/markrogoyski/math-php/tree/v2.6.0"
-            },
-            "time": "2022-04-10T05:15:37+00:00"
-        },
-        {
             "name": "monolog/monolog",
             "version": "2.5.0",
             "source": {
@@ -5206,16 +4940,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.13.2",
+            "version": "v4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077"
+                "reference": "34bea19b6e03d8153165d8f30bba4c3be86184c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/210577fe3cf7badcc5814d99455df46564f3c077",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/34bea19b6e03d8153165d8f30bba4c3be86184c1",
+                "reference": "34bea19b6e03d8153165d8f30bba4c3be86184c1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5262,9 +4996,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.14.0"
             },
-            "time": "2021-11-30T19:35:32+00:00"
+            "time": "2022-05-31T20:59:12+00:00"
         },
         {
             "name": "nyholm/psr7",
