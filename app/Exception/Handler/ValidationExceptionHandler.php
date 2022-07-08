@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -26,12 +27,12 @@ class ValidationExceptionHandler extends ExceptionHandler
         $this->stopPropagation();
 
         /** @var ValidationException $throwable */
-        $httpBody = $throwable->validator->errors()->first();
+        $errorMsg = $throwable->validator->errors()->first();
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(422)->withBody(new SwooleStream(json_encode([
                 'code' => SystemCode::VALIDATOR_ERR,
-                'msg' => SystemCode::getMessage(SystemCode::VALIDATOR_ERR) . $httpBody,
+                'msg' => SystemCode::getMessage(SystemCode::VALIDATOR_ERR, $errorMsg),
                 'status' => false,
                 'data' => [],
             ], JSON_UNESCAPED_UNICODE)));

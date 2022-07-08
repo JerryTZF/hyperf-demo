@@ -43,7 +43,7 @@ class SystemCode extends AbstractConstants
     public const RATE_LIMIT_ERR = 9905;
 
     /**
-     * @Message("数据验证失败，原因如下：")
+     * @Message("数据验证失败，原因如下：%s")
      */
     public const VALIDATOR_ERR = 9906;
 }

@@ -13,8 +13,8 @@ return [
     // 自定义队列进程的队列名称
     'redis-queue' => [
         // 使用驱动(这里我们使用Redis作为驱动。AMQP等其他自行更换)
-        //        'driver' => Hyperf\AsyncQueue\Driver\RedisDriver::class,
-        'driver' => App\Process\AsyncQueue\Driver::class,
+        'driver' => Hyperf\AsyncQueue\Driver\RedisDriver::class,
+        //        'driver' => App\Process\AsyncQueue\Driver::class,
         // Redis连接信息
         'redis' => [
             'pool' => 'default',
