@@ -15,5 +15,7 @@ return [
         App\Middleware\CorsMiddleware::class,
         // 验证器中间件(官方)
         Hyperf\Validation\Middleware\ValidationMiddleware::class,
+        // saas服务中间件
+        App\Middleware\SaasMiddleware::class
     ],
 ];

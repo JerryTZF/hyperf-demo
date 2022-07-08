@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Lib\_Log\Log;
 
 class IndexController extends AbstractController
 {
