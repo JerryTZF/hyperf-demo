@@ -51,4 +51,9 @@ class ErrorCode extends AbstractConstants
      * @Message("获取锁超时")
      */
     public const GET_LOCK_ERR = 2986;
+
+    /**
+     * @Message("日志类型错误")
+     */
+    public const LOG_TYPE_ERR = 2987;
 }

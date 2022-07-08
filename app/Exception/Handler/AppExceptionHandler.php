@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Exception\Handler;
 
 use App\Constants\SystemCode;
@@ -22,12 +23,13 @@ class AppExceptionHandler extends ExceptionHandler
 {
     public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
-        // CLI异常输出
-        Log::stdout()->error($throwable->getMessage());
-
-        // DISK异常记录
-        $errorInfo = sprintf('发生系统异常:%s;行号为:[%s];文件为:[%s]', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile());
-        Log::get('AppExceptionHandler@handle')->error($errorInfo);
+        $errorInfo = sprintf(
+            '发生系统异常:%s;行号为:[%s]; 文件为:[%s]',
+            $throwable->getMessage(),
+            $throwable->getLine(),
+            $throwable->getFile()
+        );
+        Log::error($errorInfo);
 
         return $response->withHeader('Content-Type', 'application/json')
             ->withStatus(500)
