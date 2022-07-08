@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Listener;
 
 use App\Lib\_Log\Log;
@@ -45,25 +46,22 @@ class AsyncRedisQueueListener implements ListenerInterface
                 $message = sprintf('队列:%s;长度:%s', $event->key, $event->length);
                 foreach (['debug' => 10, 'info' => 50, 'warning' => 500] as $lv => $value) {
                     if ($event->length < $value) {
-                        Log::stdout()->{$lv}($message);
-                        Log::get('AsyncRedisQueueListener@QueueLength')->{$lv}($message);
+                        Log::$lv($message);
                         break;
                     }
                 }
 
                 if ($event->length >= $value) {
-                    Log::get('AsyncRedisQueueListener@QueueLength')->error($message);
+                    Log::error($message);
                 }
                 break;
             case 'Hyperf\\AsyncQueue\\Event\\FailedHandle':
                 [$msg, $trace] = ['消息最终消费失败,原因为:' . $event->getThrowable()->getMessage(), $event->getThrowable()->getTrace()];
-                Log::get('AsyncRedisQueueListener@FailedHandle')->error($msg, $trace);
-                Log::stdout()->error($msg);
+                Log::error($msg, $trace);
                 break;
             case 'Hyperf\\AsyncQueue\\Event\\RetryHandle':
                 [$msg, $trace] = ['消息正在重试,原因为:' . $event->getThrowable()->getMessage(), $event->getThrowable()->getTrace()];
-                Log::get('AsyncRedisQueueListener@RetryHandle')->warning($msg, $trace);
-                Log::stdout()->warning($msg);
+                Log::error($msg, $trace);
                 break;
             default:
                 var_dump($event);

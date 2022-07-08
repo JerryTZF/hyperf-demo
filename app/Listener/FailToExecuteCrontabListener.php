@@ -31,7 +31,7 @@ class FailToExecuteCrontabListener implements ListenerInterface
     {
         if ($event instanceof FailToExecute) {
             $info = sprintf('[定时任务异常监听器][任务:%s][错误:%s]', $event->crontab->getName(), $event->throwable->getMessage());
-            Log::stdout()->error($info);
+            Log::error($info);
         } else {
             var_dump($event);
         }

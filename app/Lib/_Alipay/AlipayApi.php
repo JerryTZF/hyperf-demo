@@ -304,7 +304,7 @@ class AlipayApi
                 ];
             }
 
-            Log::get('AlipayService@refund')->error($result->subMsg);
+            Log::error($result->subMsg);
             return [
                 'status' => false,
                 'msg' => '调用失败，原因：' . $result->msg . '，' . $result->subMsg,
@@ -391,7 +391,7 @@ class AlipayApi
                 ->create($subject, $outTradeNo, $totalAmount, $buyerId);
             $responseCheck = new ResponseChecker();
 
-            Log::get('AlipayService@createTrade')->info(json_encode($result, JSON_UNESCAPED_UNICODE));
+            Log::info(json_encode($result, JSON_UNESCAPED_UNICODE));
 
             if ($responseCheck->success($result)) {
                 return [
@@ -404,7 +404,7 @@ class AlipayApi
                 ];
             }
 
-            Log::get('AlipayService@createTrade')->error($result->subMsg);
+            Log::error($result->subMsg);
             return [
                 'status' => false,
                 'msg' => '调用失败，原因：' . $result->msg . '，' . $result->subMsg,
@@ -444,7 +444,7 @@ class AlipayApi
                 ];
             }
 
-            Log::get('AlipayService@queryTrade')->error($result->subMsg);
+            Log::error($result->subMsg);
             return [
                 'status' => false,
                 'msg' => '调用失败，原因：' . $result->msg . '，' . $result->subMsg,
@@ -481,7 +481,7 @@ class AlipayApi
                 ];
             }
 
-            Log::get('AlipayService@queryTrade')->error($result->subMsg);
+            Log::error($result->subMsg);
 
             return [
                 'status' => false,
@@ -515,7 +515,7 @@ class AlipayApi
                 ];
             }
 
-            Log::get('AlipayService@decrypt')->error($result->subMsg);
+            Log::error($result->subMsg);
             return [
                 'status' => false,
                 'msg' => '调用失败，原因：' . $result->msg . '，' . $result->subMsg,
