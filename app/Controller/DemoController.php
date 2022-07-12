@@ -19,17 +19,11 @@ use App\Lib\_Cache\Cache;
 use App\Lib\_Lock\RedisLock;
 use App\Lib\_Office\ExportExcelHandler;
 use App\Lib\_RedisQueue\DriverFactory;
-use App\Lib\_Validator\DemoValidator;
-use App\Middleware\CheckTokenMiddleware;
 use App\Model\Good;
 use App\Model\SaleRecords;
-use App\Service\DemoService;
 use Hyperf\DbConnection\Db;
-use Hyperf\Di\Annotation\Inject;
-use Hyperf\Filesystem\FilesystemFactory;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
-use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
 use Intervention\Image\ImageManager;
 use Psr\Http\Message\ResponseInterface;
@@ -37,29 +31,6 @@ use Psr\Http\Message\ResponseInterface;
 #[Controller(prefix: 'demo')]
 class DemoController extends AbstractController
 {
-    #[Inject]
-    protected DemoService $service;
-
-    // 演示异地登录 + 缓存
-    #[PostMapping(path: 'get_admin_info')]
-    #[Middleware(CheckTokenMiddleware::class)]
-    public function getAdminInfo(): array
-    {
-        $account = $this->request->input('account');
-        $uuid = $this->request->input('uuid');
-        return $this->service->getAdminInfo($account, $uuid);
-    }
-
-    // 演示更新数据刷新缓存
-    #[PostMapping(path: 'update_admin_info')]
-    #[Middleware(CheckTokenMiddleware::class)]
-    public function updateAdminInfo(): array
-    {
-        $account = $this->request->input('account');
-        $password = $this->request->input('password');
-        return $this->service->updateAdminInfo($account, $password);
-    }
-
     #[PostMapping(path: 'cache')]
     public function simpleCache(): array
     {
@@ -83,60 +54,6 @@ class DemoController extends AbstractController
             'single' => $cacheData,
             'multiple' => $multipleData,
         ])->getResult();
-    }
-
-    // 重定向演示
-    #[GetMapping(path: 'redirect_2_wiki')]
-    public function redirect(): ResponseInterface
-    {
-        return $this->response->redirect('https://wiki.tzf-foryou.xyz');
-    }
-
-    // 演示文件系统(阿里云OSS)
-    #[PostMapping(path: 'oss')]
-    public function file(FilesystemFactory $factory): array|ResponseInterface
-    {
-        // 获取阿里云OSS适配器
-        $ossInstance = $factory->get('oss');
-        $action = $this->request->input('action', 'get');
-
-        DemoValidator::ossValidator(['action' => $action]);
-
-        if ($action === 'get') {
-            $fileName = $this->request->input('file_name');
-            if ($fileName === null) {
-                [$e, $m] = [ErrorCode::FILE_NAME_ERR, ErrorCode::getMessage(ErrorCode::FILE_NAME_ERR)];
-                return $this->result->setErrorInfo($e, $m)->getResult();
-            }
-            $remotePath = DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $fileName;
-            // 下载到本地
-            $localPath = BASE_PATH . DIRECTORY_SEPARATOR . 'runtime' . DIRECTORY_SEPARATOR . $fileName;
-            file_put_contents($localPath, $ossInstance->read($remotePath));
-
-            return $this->response->download($localPath);
-        }
-
-        if ($action === 'upload') {
-            $file = $this->request->file('upload');
-            [$isMimeRight, $isExtensionRight] = [
-                in_array($file->getMimeType(), ['image/heic', 'image/png', 'image/jpeg']),
-                in_array($file->getExtension(), ['png', 'jpg', 'jpeg', 'heic', 'PNG', 'JPG', 'JPEG', 'HEIC']),
-            ];
-            if (! $isMimeRight || ! $isExtensionRight) {
-                [$e, $m] = [ErrorCode::FILE_MIME_ERR, ErrorCode::getMessage(ErrorCode::FILE_MIME_ERR)];
-                return $this->result->setErrorInfo($e, $m)->getResult();
-            }
-
-            // 写入OSS
-            $fileName = 'UPLOADER_' . date('YmdHis') . '.' . $file->getExtension();
-            $remotePath = DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $fileName;
-            [$endpoint, $bucket] = [env('OSS_ENDPOINT'), env('OSS_BUCKET')];
-            $address = "https://{$bucket}.{$endpoint}/img/" . $fileName;
-            $ossInstance->write($remotePath, file_get_contents($file->getRealPath()));
-            return $this->result->setData(['address' => $address])->getResult();
-        }
-
-        return $this->result->getResult();
     }
 
     // 依赖 intervention/image 包 && gd或者imagick扩展

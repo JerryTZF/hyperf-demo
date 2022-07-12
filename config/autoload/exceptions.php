@@ -18,6 +18,8 @@ return [
             App\Exception\Handler\ValidationExceptionHandler::class,
             // 数据库未找到数据异常处理
             App\Exception\Handler\ModelNotFoundExceptionHandler::class,
+            // 阿里巴巴SDK异常捕获处理
+            App\Exception\Handler\AlibabaExceptionHandler::class,
             // 全局HTTP异常处理
             Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler::class,
             // 限流异常处理器

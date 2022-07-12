@@ -15,6 +15,7 @@
     "php": ">=8.0",
     "ext-iconv": "*",
     "ext-openssl": "*",
+    "alibabacloud/ice-20201109": "^1.2",
     "alipaysdk/easysdk": "^2.2",
     "endroid/qr-code": "^4.4",
     "gregwar/captcha": "^1.1",
