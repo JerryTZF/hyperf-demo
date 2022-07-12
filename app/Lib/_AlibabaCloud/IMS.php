@@ -19,14 +19,14 @@ class IMS
 {
     private ICE $client;
 
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $configObj = new Config();
-        $configObj->accessKeyId = $config['accessKeyId'] ?? env('IMS_ACCESS_ID', '');
-        $configObj->accessKeySecret = $config['accessKeySecret'] ?? env('IMS_ACCESS_SECRET', '');
-        $configObj->regionId = $config['regionId'] ?? env('IMS_REGIONID', '');
-        $configObj->endpoint = $config['endpoint'] ?? env('IMS_ENDPOINT', '');
-        $this->client = new ICE($configObj);
+        $config = new Config();
+        $config->accessKeyId = $configs['accessKeyId'] ?? env('IMS_ACCESS_ID', '');
+        $config->accessKeySecret = $configs['accessKeySecret'] ?? env('IMS_ACCESS_SECRET', '');
+        $config->regionId = $configs['regionId'] ?? env('IMS_REGIONID', '');
+        $config->endpoint = $configs['endpoint'] ?? env('IMS_ENDPOINT', '');
+        $this->client = new ICE($config);
     }
 
     public function RegisterMediaContent(
