@@ -50,8 +50,8 @@ class IMS
         return true;
     }
 
-    public function test(): void
+    public function release1(): void
     {
-        echo 'hello world';
+        echo '这里是release1新增的一个功能';
     }
 }
