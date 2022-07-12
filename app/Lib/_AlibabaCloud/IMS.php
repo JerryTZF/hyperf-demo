@@ -52,6 +52,7 @@ class IMS
 
     public function release1(): void
     {
-        echo '这里是release1新增的一个功能';
+        echo '这是release1.0的开始';
+        echo '我加了阿里云的一些功能';
     }
 }
