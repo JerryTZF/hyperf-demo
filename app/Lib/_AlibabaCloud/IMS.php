@@ -52,5 +52,6 @@ class IMS
 
     public function test(): void
     {
+        echo 'hello world';
     }
 }
