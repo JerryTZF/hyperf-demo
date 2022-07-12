@@ -48,5 +48,6 @@ class IMS
     public function updateMediaContent(): bool
     {
         return true;
+
     }
 }
