@@ -49,4 +49,8 @@ class IMS
     {
         return true;
     }
+
+    public function test(): void
+    {
+    }
 }
