@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-
 return [
     'default' => [
         'driver' => env('DB_DRIVER', 'mysql'),
@@ -27,7 +26,7 @@ return [
             'connect_timeout' => 10.0,
             'wait_timeout' => 3.0,
             'heartbeat' => -1,
-            'max_idle_time' => (float)env('DB_MAX_IDLE_TIME', 60),
+            'max_idle_time' => (float) env('DB_MAX_IDLE_TIME', 60),
         ],
         'commands' => [
             'gen:model' => [
