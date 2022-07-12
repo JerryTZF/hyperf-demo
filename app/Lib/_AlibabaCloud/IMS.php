@@ -44,4 +44,9 @@ class IMS
 
         return $response->body->mediaId;
     }
+
+    public function updateMediaContent(): bool
+    {
+        return true;
+    }
 }
