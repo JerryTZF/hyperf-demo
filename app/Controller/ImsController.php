@@ -29,4 +29,8 @@ class ImsController extends AbstractController
 
         return $this->result->setData(['mediaId' => $mediaId])->getResult();
     }
+
+    public function fn(): void
+    {
+    }
 }
