@@ -53,5 +53,6 @@ class IMS
     public function release1(): void
     {
         echo 'feature/fn->1';
+        echo 'feature/fn2->2';
     }
 }
