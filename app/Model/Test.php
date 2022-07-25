@@ -13,6 +13,10 @@ namespace App\Model;
 
 use Hyperf\Database\Model\SoftDeletes;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class Test extends Model
 {
     use SoftDeletes;
@@ -35,7 +39,6 @@ class Test extends Model
 
     public function __construct(int $id, array $attributes = [])
     {
-
         parent::__construct($attributes);
     }
 }
